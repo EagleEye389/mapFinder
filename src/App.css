@@ -1,33 +1,80 @@
-.App {
+.app {
+  margin:0;
+  padding: 0;
+  height: 80;
+  font-size: 20px;
+  z-index: 1;
+}
+
+.content{
+  margin-left: 50px;
+  margin-right: 50px;
+  height:100vh;
+  box-shadow: 5px 5px 5px gray;
+  position: relative;
+}
+
+.pathSelectArea{
+  min-height: 250px;
+  background-color: gray;
+  padding: 10px;
+  z-index: 999;
+  display: inline;
+  position: absolute;
+  top:0;
+  left:0;  
+  right: 65%;
+  opacity: 1.0;
+  bottom:90%;  
+  
+}
+.mapArea{
+display: inline-block;
+min-height: 100vh;
+position: relative;
+border: 1px solid gray;
+width: 100%;
+ background-color: green;
+ z-index: 2;
+ margin: 0px;
+ padding: 0px;
+}
+
+button{
   text-align: center;
+  padding: 5px;
+  background-color: white;
+  color:black;
+  margin-right: 50px;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.topBarTime{
+  background-color: gray;
   color: white;
+  width: auto;
+  display: inline-block;
+  z-index: 9999;
+  position: absolute;
+  right: 50%;
+  height: 30px;
+  padding: 5px;
 }
 
-.App-link {
-  color: #61dafb;
+.topBarDistance{
+  background-color: gray;
+  color: white;
+  width: auto;
+  display: inline-block;
+  z-index: 9999;
+  position: absolute;
+  right: 0;
+  height: 30px;
+  padding: 5px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.error{
+  font-size: 13px;
+  color: red;
+  font-weight:bold;
+  font-family: 'Times New Roman', Times, serif;
 }

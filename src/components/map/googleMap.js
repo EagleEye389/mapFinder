@@ -1,4 +1,5 @@
 import React from 'react';
+import {mapkey }from '../../Helper/constant';
 import { Map, GoogleApiWrapper,Marker ,Polyline} from 'google-maps-react';
 const Mapping =(props) =>{
 return (
@@ -28,4 +29,4 @@ return (
     }
 
 
-export default GoogleApiWrapper({apiKey:'AIzaSyCi5qh2vNXb8_HR3G5cGpHXmbM1jca2vQQ'})(Mapping);
+export default GoogleApiWrapper({apiKey:mapkey})(Mapping);

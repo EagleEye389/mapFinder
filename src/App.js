@@ -6,6 +6,8 @@ import Info from './components/Information/Information';
 import ButtonControl from './components/button/buttonControl';
 import normalizedLocation from './Helper/utiltiy';
 import Map from './components/map/googleMap';
+import {startLabel ,dropLabel, dropPlaceholder,
+  startPlaceholder,timeLabel,distanceLabel} from './/Helper/constant'
 
 class App extends Component{
   constructor(props){
@@ -24,23 +26,24 @@ class App extends Component{
     }
   }
   
+  // set source
   checkoutSource=(pro)=>{
-    console.log("checkout being called");
     this.setState({source:pro.description})
   }
   
+  //set destination
   checkoutDestination=(pro)=>{
-    console.log("checkout being called");
-    this.setState({destination:pro.description})
+     this.setState({destination:pro.description})
   }
   
-
+// Reset tiggering and reset the value for next trigger
    resetValue=()=>{
      this.setState({
        valueEmpty:false
      })
    }
 
+// On button reset button reset the data
   handleResetHandler=()=>{
     this.setState({
       destination:"",
@@ -57,11 +60,11 @@ class App extends Component{
     })
   }
 
+  // Set the query to mock api
   handleSubmission=()=>{
 
-  if(this.state.source && this.state.destination){
-  
-    
+  if(this.state.source && this.state.destination){  
+    // get the token
     Axiosinstance.post('/route' ,{
                                   "origin": this.state.source,
                                   "destination": this.state.destination
@@ -69,7 +72,7 @@ class App extends Component{
     ).then((result)=>{
     let token = result.data.token;
      
-    
+    // If token is present the get the path and other data.
      const check =()=>{
 
      
@@ -108,26 +111,13 @@ class App extends Component{
                         })
                       });
                     }
+        // call the rescursive function in case "in progress"
+         check();
 
-                    check();
     }).catch((error)=>{
       console.log(error);
       alert("Internal server error , please try again !!")
-    })
-
-    /*let dummy = [
-      {lat:22.372081,lng:114.107877},
-      {lat:22.326442,lng:114.167811},
-      {lat:22.284419,lng:114.159510}
-    ]
-
-    this.setState({
-      path :dummy,
-      toggle:!this.state.toggle,
-      time:"2000",
-      distance:'40000',
-      
-    })*/
+    })    
   }
   else
   {
@@ -142,27 +132,27 @@ class App extends Component{
        <div className="content">  
          <Info 
            classStyle ='topBarTime' 
-           label ='Time'
+           label ={timeLabel}
            value={this.state.time} />
          <Info 
           classStyle ='topBarDistance' 
-          label ='Distance' 
+          label ={distanceLabel} 
           value={this.state.distance} />
 
             <div className="pathSelectArea">
              <InputControl
               reset={this.resetValue}
               isReset={this.state.valueEmpty}
-              label="Start Location"  
-              placeholder="Enter Start Location"
+              label={startLabel}  
+              placeholder={startPlaceholder}
               selection={ this.checkoutSource}
               />
 
             <InputControl
               reset ={this.resetValue}
               isReset ={this.state.valueEmpty}
-              label="Drop Off Location"  
-              placeholder="Enter drop off location"
+              label={dropLabel}  
+              placeholder={dropPlaceholder }
               selection={ this.checkoutDestination}
               />                     
             

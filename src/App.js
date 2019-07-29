@@ -7,7 +7,7 @@ import ButtonControl from './components/button/buttonControl';
 import normalizedLocation from './Helper/utiltiy';
 import Map from './components/map/googleMap';
 import {startLabel ,dropLabel, dropPlaceholder,
-  startPlaceholder,timeLabel,distanceLabel} from './/Helper/constant'
+  startPlaceholder,timeLabel,distanceLabel} from './Helper/constant'
 
 class App extends Component{
   constructor(props){
@@ -157,10 +157,12 @@ class App extends Component{
               />                     
             
             <br/><br/>
-           < ButtonControl label={this.state.submitLabel} handler={this.handleSubmission} />
-           < ButtonControl label="Reset" handler={this.handleResetHandler} />
+            {this.state.errorMsg && <span className="error">{this.state.errorMsg}</span>}
+            <br/>
+           < ButtonControl styler="button" label={this.state.submitLabel} handler={this.handleSubmission} />
+           < ButtonControl styler="button" label="Reset" handler={this.handleResetHandler} />
            <br/>
-           {this.state.errorMsg && <span className="error">{this.state.errorMsg}</span>}
+           
           </div>
           <div className="mapArea">
            <Map 

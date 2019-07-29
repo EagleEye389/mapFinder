@@ -26,8 +26,12 @@
   right: 65%;
   opacity: 1.0;
   bottom:90%;  
+  min-width:200px;
   
 }
+
+
+
 .mapArea{
 display: inline-block;
 min-height: 100vh;
@@ -40,12 +44,15 @@ width: 100%;
  padding: 0px;
 }
 
-button{
+.button{
   text-align: center;
   padding: 5px;
-  background-color: white;
+  background-color: skyblue;
   color:black;
   margin-right: 50px;
+  box-shadow: 2px 2px 4px 2px rgb(61, 142, 168);
+  width: 100px;
+
 }
 
 .topBarTime{
@@ -74,7 +81,9 @@ button{
 
 .error{
   font-size: 13px;
-  color: red;
+  color:white;
   font-weight:bold;
   font-family: 'Times New Roman', Times, serif;
+  margin-bottom: 10px;
+
 }

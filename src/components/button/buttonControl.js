@@ -1,7 +1,7 @@
 import React from 'react';
-const buttonControl=({label,handler})=>{
+const buttonControl=({label,handler,styler})=>{
  return(
-    <button onClick={()=>handler()}>{label}</button>
+    <button className={styler} onClick={()=>handler()}>{label}</button>
  )
 }
 export default buttonControl;

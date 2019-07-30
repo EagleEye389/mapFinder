@@ -49,12 +49,16 @@ width: 100%;
   padding: 5px;
   background-color: skyblue;
   color:black;
-  margin-right: 50px;
-  box-shadow: 2px 2px 4px 2px rgb(61, 142, 168);
+  margin-right: 50px;  
   width: 100px;
 
 }
+.button:hover{
+  
+  box-shadow: 2px 2px 4px 2px rgb(61, 142, 168);
 
+
+}
 .topBarTime{
   background-color: gray;
   color: white;

@@ -11,7 +11,8 @@ class InputControl extends Component{
     componentDidUpdate(){
         if(this.props.isReset && this.autoplace.current.state.value)
         {
-            this.autoplace.current.state.value=""; 
+            
+            this.autoplace.current.state.value="";             
             this.props.reset();              
           
         }

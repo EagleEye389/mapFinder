@@ -38,8 +38,9 @@ class Selection extends Component{
 
       displayErrorMessage = (msg)=>{ 
           this.changeLoader(false);
-          this.setState({errorMsg:msg})
+          this.setState({errorMsg:msg,time:'',distance:''})
       }
+
       handleSubmission=async(from ,to)=>{
           this.changeLoader(true);
 
@@ -78,7 +79,7 @@ class Selection extends Component{
             <div className="input-box-message">
                 {this.state.time && <Info label="total_time" value ={this.state.time}/>}
                 {this.state.distance && <Info label="total_distance" value ={this.state.distance}/>}
-                {this.state.errorMsg}
+                <span className="error">{this.state.errorMsg}</span>
              </div>
                
         </div>)

@@ -13,8 +13,13 @@
 
 @media screen and (max-width:710px){
   .form-area{
-    flex:0 0 40%;
+    flex:0 0 60%;
     margin: 0px;
     padding: 0px;
   }
+}
+
+.error{
+  color: red;
+  margin: 5px;
 }

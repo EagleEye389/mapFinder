@@ -1,10 +1,10 @@
 import React from 'react';
-import Button from '../button/buttonControl';
+import Button from '../Button/Button';
 import {shallow} from 'enzyme';
 
 
 it('renders without crashing', () => {
- let buttoncontrol  = shallow(<Button  />)
 
- 
+const buttonControl = shallow(<Button  Isvisible={false}/>)
+ expect(buttonControl.find('button')).toBe(0);
 });

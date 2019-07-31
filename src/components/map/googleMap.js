@@ -1,5 +1,5 @@
 import React from 'react';
-import {googleAPIKey } from '../../common/config'
+import {googleAPIKey } from '../../common/Config'
 import { Map, GoogleApiWrapper,Marker ,Polyline} from 'google-maps-react';
 
 const Mapping =(props) =>{

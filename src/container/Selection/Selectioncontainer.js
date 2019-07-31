@@ -1,25 +1,23 @@
 import React , {Component} from 'react';
+
 import InputControl from '../AutoInput/InputControl';
-import './Selection.css';
-import {normalizedLocation} from '../../helper/utiltiy';
 import Info from '../../components/Information/Information';
-import getDirections from '../../helper/apiRequest';
 import {Loader} from '../../components/Loader/Loader';
 
+import getDirections from '../../helper/apiRequest';
+import {normalizedLocation} from '../../helper/utiltiy';
+import './Selection.css';
 
 class Selection extends Component{
 
-    constructor(props){
-        super(props);
-        this.state = {
+    state = {
            errorMsg:'',
            time:'',
            distance:'',
            path : [],
            isLoading:false
-        }
-        
     }
+
     handleResetHandler=()=>{
         this.setState({
           time:"",
@@ -36,10 +34,10 @@ class Selection extends Component{
         }));
     };
 
-      displayErrorMessage = (msg)=>{ 
+    displayErrorMessage = (msg)=>{ 
           this.changeLoader(false);
           this.setState({errorMsg:msg,time:'',distance:''})
-      }
+     }
 
       handleSubmission=async(from ,to)=>{
           this.changeLoader(true);
@@ -77,11 +75,10 @@ class Selection extends Component{
             <Loader isLoading={this.state.isLoading} />
             <InputControl getDirections = {this.handleSubmission} resetMap = { this.handleResetHandler }/>              
             <div className="input-box-message">
-                {this.state.time && <Info label="total_time" value ={this.state.time}/>}
-                {this.state.distance && <Info label="total_distance" value ={this.state.distance}/>}
+                {this.state.distance && <Info label="total distance" value ={this.state.distance}/>}
+                {this.state.time && <Info label="total time" value ={this.state.time}/>}
                 <span className="error">{this.state.errorMsg}</span>
-             </div>
-               
+             </div>               
         </div>)
     }
 }

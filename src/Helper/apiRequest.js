@@ -1,5 +1,5 @@
-import Axiosinstance from '../axios/axiosSetup';
-import {API_CONSTANTS} from './config/'
+import Axiosinstance from '../axios/AxiosSetup';
+import {API_CONSTANTS} from './constant'
 
 const getToken = async(url, request)=>{
      const response =   await Axiosinstance.post(url,request);
@@ -14,18 +14,18 @@ const getPath = async (token)=>{
     return data;
 }
 
-const getDirections = async(from,to)=>{
+const getDirections = async(origin,destination)=>{
        const url =  API_CONSTANTS.route;
        const request = {
-           "origin":from,
-           "destination":to
+            origin,
+            destination
        }
     const token  = await getToken(url,request);
     let result  =  await getPath(token)
 
-    if(result && result.data && result.data.status.toLowerCase() === "in progress")
+    if(result && result.data && result.data.status.toLowerCase() === API_CONSTANTS.inProgress)
     {
-        getDirections(from,to);
+        getDirections(origin,destination);
     }
     return result;    
     

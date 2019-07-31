@@ -1,5 +1,5 @@
 import React from 'react';
-import Map from '../map/googleMap';
+import Map from '../Map/GoogleMap'
 import {shallow} from 'enzyme';
 
 

@@ -7,8 +7,8 @@
 .content{
   margin-left: 20px;
   margin-right: 20px;
-  height:100vh;
-  box-shadow: 5px 5px 5px gray;
+  height:95vh;
+  box-shadow: 5px 5px 5px 5px gray;
   position: relative;
   display: flex;
   border-radius: 20px;
@@ -18,22 +18,4 @@
   .content{
     margin:0px;
     }
-}
-
-
-.loader{
-   
-  min-height: 250px;
-  background-color: red;
-  padding: 10px;
-  z-index: 6;
-  display: inline;
-  position: absolute;
-  top:0;
-  left:0;  
-  right: 65%;
-  opacity: 1.0;
-  bottom:90%;  
-  min-width:200px;
-  opacity: 0.5;
 }

@@ -1,7 +1,8 @@
-import axios from 'axios'
+import axios from 'axios';
+import {baseUrl} from '../common/config';
 
 const instance = axios.create({
-    baseURL: 'https://mock-api.dev.lalamove.com',
+    baseURL: baseUrl,
     headers: {'Content-Type': 'application/json'}
   });
 

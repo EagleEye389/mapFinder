@@ -1,4 +1,5 @@
 import React from 'react';
+
 const Info =({classStyle ,label , value})=>{
 
  return(

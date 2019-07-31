@@ -1,0 +1,38 @@
+.input-box{
+  position: relative;
+  margin-bottom:20px;
+}
+.input-box-label{
+    display: block;
+    margin: 5px;
+}
+.input-box-area{
+    display: inline-block;
+    width:100%;
+    margin-top:20px;
+}
+.input-text{
+    display: inline;
+    margin:5px;
+    
+}
+.input-text-cross{
+     display: inline;
+}
+
+.input-box-button button{
+    margin:8px;
+    box-shadow: 1px 1px 1px gray;
+
+}
+
+.input-box-button button:hover{
+    box-shadow: 2px 2px 2px gray;
+    
+}
+@media screen and (max-width:700px){
+    .input-text{
+        width:80%;
+        
+    }
+}

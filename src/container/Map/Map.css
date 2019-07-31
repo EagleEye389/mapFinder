@@ -1,0 +1,40 @@
+.map-area {
+     width: 100%;
+     position: relative;   
+ }
+
+ .topBarTime{
+    background-color: gray;
+    color: white;
+    width: auto;
+    display: inline-block;
+    z-index: 9999;
+    position: absolute;
+    right: 50%;
+    height: 30px;
+    padding: 5px;
+  }
+  
+  .topBarDistance{
+    background-color: gray;
+    color: white;
+    width: auto;
+    display: inline-block;
+    z-index: 9999;
+    position: absolute;
+    right: 0;
+    height: 30px;
+    padding: 5px;
+  }
+  
+  .error{
+    font-size: 13px;
+    color:white;
+    font-weight:bold;
+    font-family: 'Times New Roman', Times, serif;
+    margin-bottom: 10px;
+  
+  }
+  
+ 
+ 

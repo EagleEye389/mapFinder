@@ -1,15 +1,44 @@
-## Available Scripts
+# Google Map Integration with React for Path Directions
 
-In the project directory, you can run:
+This app is created to get the path directions from the google maps with the help of the Apis, which would provide the co-ordinates of path.
 
-### `npm start`
+Technologies Used:
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+* React
+* Jest
+* Enzymes
+* ES 6
+* GIT
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Installation
 
-We need a google api key and same need to place in mapkey constant src/Helper/constant.js location.
+```
+npm install
+```
 
-![](images/screenshot.PNG)
+Change MockApi Urls in src/config/apiConstant file
+
+Add a `.env` file with the following:
+
+```
+REACT_APP_GOOGLE_API_KEY = <api-key>
+REACT_APP_API_KEY = <mock-api-url>
+```
+
+## Run Tests
+
+```
+npm test
+```
+
+## Run App in development mode
+
+```
+npm  start
+```
+
+## Build for production
+
+```
+npm run build
+```

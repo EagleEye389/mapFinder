@@ -1,7 +1,15 @@
 import React from "react";
 import "./Loader.css";
 
-function Loader({ isLoading }) {
+/**
+ * @name Loader
+ * @type {Component}
+ * @description Loader control use during api calls
+ * @param {{isLoading}} Object Props to stateless component
+ * @returns {JSX}
+ */
+
+const Loader = ({ isLoading }) =>{
   return (
     isLoading && (
       <div className="loader-box">

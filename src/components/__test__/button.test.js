@@ -2,42 +2,44 @@ import React from 'react';
 import Button from '../Button/Button';
 import {shallow} from 'enzyme';
 
-describe('Button component is rendering properly',()=>{
+let component;
+let buttonText = 'test';
+let buttonClass = 'test'; 
+let a = 5;      
+const test =()=> a++;        
 
-    it('Button is visible', () => {
-     const buttonControl = shallow(<Button  Isvisible={true}/>)
-     expect(buttonControl.find('button').length).toBe(1);
-    });
-    
+describe('Button component is hidden check',()=>{
+     
+    beforeEach(() => {
+        component = shallow(<Button isvisible={false} />);
+      });
+        
     it('Button is hidden', () => {
-        const buttonControl = shallow(<Button  Isvisible={false}/>)
-        expect(buttonControl.find('button').length).toBe(0);
+        expect(component.find('button').length).toBe(0);
     });
+});
 
-    it('Button showing text properly',()=>{
-        let buttonText = 'test';
-        const buttonControl = shallow(<Button  Isvisible={true} label={buttonText} />)
-        expect(buttonControl.props().children).toBe(buttonText)
+describe('Button component is workinf properly',()=>{
+    beforeEach(() => {
+        component = shallow(<Button label={buttonText} styler={buttonClass} handleClick={test} />);
+      });
+
+      it('Button showing text properly',()=>{
+        expect(component.props().children).toBe(buttonText)
     })
 
     it('Button class is rendering correctly',()=>{        
-        let buttonClass = 'test';        
-        const buttonControl = shallow(<Button  Isvisible={true} styler={ buttonClass }/>)
-        expect(buttonControl.hasClass(buttonClass)).toBe(true)
+        expect(component.hasClass(buttonClass)).toBe(true)
 
     })
 
-    it('Button action is working properly',()=>{  
-        let a = 5;      
-        const test =()=> a++;    
-        const buttonControl = shallow(<Button  Isvisible={true}  action={test}/>)
-        buttonControl.find('button').simulate('click');
+    it('Button action is working properly',()=>{             
+        component.find('button').simulate('click');
         expect(a).toBe(6)
     })
     
     it('Button snapshot test',()=>{
-        const buttonControl = shallow(<Button  Isvisible={true}  action={test}/>)
-        expect(buttonControl).toMatchSnapshot();
+        expect(component).toMatchSnapshot();
 
     })
 

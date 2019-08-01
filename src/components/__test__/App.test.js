@@ -2,18 +2,21 @@ import React from 'react'
 import { shallow } from 'enzyme';
 import App from '../../container/App/App'
 
-describe('Test component is rendering', () => {
-    test('Basic HTML is rendered', () => {
-        const wrapper = shallow(<App />)
-        expect(wrapper.find('.content').length).toBe(1)
-    })
+ let component;
+  describe('Test component is rendering', () => {
 
-    test('Check whether state is updated', () => {
-        const wrapper = shallow(<App />)
+    beforeEach(() => {
+    component = shallow(   <App  /> )});
+
+    it('Basic HTML is rendered', () => {
+        expect(component.find('.content').length).toBe(1)
+    });
+
+    it('Check whether state is updated', () => {
         const path = [0,1,2,3];
         const mockPath = {path}
-
-        wrapper.instance().updateMap(mockPath.path);
-        expect(wrapper.instance().state.path).toBe(mockPath.path)
-    })
+        component.instance().updateMap(mockPath.path);
+        expect(component.instance().state.path).toBe(mockPath.path)
+    });
 })
+  

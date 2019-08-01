@@ -1,25 +1,32 @@
 import React from 'react';
 import { Map, GoogleApiWrapper,Marker ,Polyline} from 'google-maps-react';
 
-const Mapping =(props) =>{
+/**
+ * @name Mapping
+ * @type {Component}
+ * @description Map component to display google map and path
+ * @param {{path,google}} Object Props to stateless component
+ * @returns {JSX}
+ */
+
+const Mapping =({path,google}) =>{
 return (
 
-
    <Map
-          google={props.google}
+          google={google}
           zoom={12}
           style={{width:'100%' ,height:'100%'}}
-          center={props.path ? props.path[0] :{}}
+          center={path ? path[0] :{}}
           
         >
-           { props.path && props.path.length >0  &&      <Marker position={props.path[0]} /> }
-            {props.path && props.path.length >0  &&    <Marker position={props.path[props.path.length-1]} strokeColor="blue" /> 
+           { path && path.length >0  &&    <Marker position={path[0]} /> }
+           {path && path.length >0  &&    <Marker position={path[path.length-1]} strokeColor="blue" /> 
        
             }
             
-              {props.path && props.path.length &&     
+              {path && path.length &&     
                <Polyline
-                    path={props.path}
+                    path={path}
                     strokeColor="#0000FF"
                     strokeOpacity={0.8}
                     strokeWeight={5} />  

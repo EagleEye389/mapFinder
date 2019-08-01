@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Loader test when isLoading props is false  doesnot render 1`] = `ShallowWrapper {}`;
+
+exports[`Loader test when isLoading props is true renders correctly 1`] = `ShallowWrapper {}`;

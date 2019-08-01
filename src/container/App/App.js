@@ -1,21 +1,28 @@
 import React,{Component} from 'react';
-import Selection from '../Selection/Selectioncontainer';
-import Map from '../Map/MapContainer';
+import Selection from '../selection/selectionContainer';
+import Map from '../map/mapContainer';
 import './app.css';
 
 class App extends Component{
      
-  constructor(props){
-    super(props);
-    this.state = {
+  state = {
       path:[]
-    }
   }
+   
+    /**
+     * @name updateMap
+     * @description This method to update path to draw polyline between source and destination
+     * @param path Array of latitude and logtitude.
+     */
 
   updateMap=(path)=>{
     this.setState({path:path});
   }
 
+    /**
+     * @name resetMap
+     * @description This method to reset path to remove polyline from map.     
+     */
   resetMap =()=>{
      this.setState({path:[]})
   }

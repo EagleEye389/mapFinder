@@ -3,6 +3,7 @@
     padding: 10px;
     display: inline-block;
     flex:0 0 20%;
+    border-top-left-radius: 20%;
     
   }
 @media screen and (max-width:1024px){
@@ -13,9 +14,10 @@
 
 @media screen and (max-width:710px){
   .form-area{
-    flex:0 0 60%;
+    
     margin: 0px;
     padding: 0px;
+    height:200px;
   }
 }
 

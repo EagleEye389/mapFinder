@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { GoogleApiWrapper} from 'google-maps-react';
 import ButtonControl from '../../components/Button/Button';
 import {startLabel,dropLabel,startPlaceholder,dropPlaceholder } from '../../helper/constant';
+import Separator from '../../components/Separator/Separator';
 import './InputControl.css'
 
 class InputControl extends Component{
@@ -39,7 +40,7 @@ class InputControl extends Component{
          else{
           this.toInput.value = "";
           this.fromInput.value = "";
-          this.setState({     to:false,from:false ,submitLabel:'Submit' });        
+          this.setState({     to:false,from:false ,submitLabel:'Submit',emptyErrorFrom:"" ,emptyErrorTo:""});        
           this.props.resetMap();
          }
     }
@@ -48,7 +49,7 @@ class InputControl extends Component{
           if(box === 'from')          
           { 
             if(this.fromInput.value){
-                  this.setState({ from:true })                
+                  this.setState({ from:true,emptyErrorFrom:'' })                
              }
           else{
             this.setState({  from:false  })
@@ -58,7 +59,7 @@ class InputControl extends Component{
           if(box === 'to')
           {
             if(this.toInput.value){
-                this.setState({   to:true    })
+                this.setState({   to:true ,emptyErrorTo:''   })
                }
           else{
             this.setState({     to:false  })
@@ -76,7 +77,19 @@ class InputControl extends Component{
 
       }
       else{
-          alert("Enter the input correctly");
+
+           if(!this.fromInput.value){
+              this.setState({
+                  emptyErrorFrom:"errorOutline"
+              })
+           }
+           if(!this.toInput.value)
+           {
+              this.setState({
+                  emptyErrorTo:"errorOutline"
+              })
+
+           }
       }
   };
 
@@ -90,13 +103,14 @@ class InputControl extends Component{
                          <div className="input-box-area">
                              <div className="input-text">    
                               <input  placeholder={startPlaceholder} onChange={()=>this.HandleCrossButton('from')}
-                               type="text" ref={el => (this.fromInput = el)} />  
+                               type="text" className={this.state.emptyErrorFrom }ref={el => (this.fromInput = el)} />  
                              </div>
                             <div className="input-text-cross">
                               <ButtonControl label="X" action={()=>{this.clearAutoPlacer('from')}} Isvisible={this.state.from} />
                             </div>
                          </div>
                       </div>
+                      <Separator />
                       <div className="input-box">
                         <div className="input-box-label">
                         <label>{dropLabel}</label>
@@ -104,7 +118,7 @@ class InputControl extends Component{
                         
                          <div className="input-box-area">
                              <div className="input-text">                                
-                               <input  placeholder={dropPlaceholder} onChange={()=>this.HandleCrossButton('to')}
+                               <input  placeholder={dropPlaceholder} className={this.state.emptyErrorTo} onChange={()=>this.HandleCrossButton('to')}
                                  type="text" ref={el => (this.toInput = el)} />  
                              </div>
                             <div className="input-text-cross">
@@ -112,11 +126,13 @@ class InputControl extends Component{
                             </div>
                          </div>
                         </div>
+                        <Separator />
+
                          <div className="input-box-button">
-                         <ButtonControl label={this.state.submitLabel} Isvisible={true} action={this.getRoute} />
-                         <ButtonControl label="Reset" Isvisible ={true} action={this.clearAutoPlacer}/>                                                       
+                         <ButtonControl label={this.state.submitLabel} Isvisible={true}  styler="submit-info" action={this.getRoute} />
+                         <ButtonControl label="Reset" Isvisible ={true} styler="reset-info" action={this.clearAutoPlacer}/>                                                       
                         </div>
-                                  
+         
                       </>
                 
       )

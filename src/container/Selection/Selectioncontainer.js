@@ -3,6 +3,7 @@ import React , {Component} from 'react';
 import InputControl from '../AutoInput/InputControl';
 import Info from '../../components/Information/Information';
 import {Loader} from '../../components/Loader/Loader';
+import Separator from '../../components/Separator/Separator';
 
 import getDirections from '../../helper/apiRequest';
 import {normalizedLocation} from '../../helper/utiltiy';
@@ -73,7 +74,10 @@ class Selection extends Component{
         return (
         <div className="form-area">
             <Loader isLoading={this.state.isLoading} />
-            <InputControl getDirections = {this.handleSubmission} resetMap = { this.handleResetHandler }/>              
+            <InputControl getDirections = {this.handleSubmission} resetMap = { this.handleResetHandler }/>
+            {
+                (this.state.distance || this.state.errorMsg) && <Separator />
+            }              
             <div className="input-box-message">
                 {this.state.distance && <Info label="total distance" value ={this.state.distance}/>}
                 {this.state.time && <Info label="total time" value ={this.state.time}/>}

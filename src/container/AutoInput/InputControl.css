@@ -4,7 +4,7 @@
 }
 .input-box-label{
     display: block;
-    margin: 5px;
+    margin: 3px;
 }
 .input-box-area{
     display: inline-block;
@@ -13,7 +13,7 @@
 }
 .input-text{
     display: inline;
-    margin:5px;
+    margin:3px;
     
 }
 .input-text-cross{
@@ -30,9 +30,40 @@
     box-shadow: 2px 2px 2px gray;
     
 }
+
 @media screen and (max-width:700px){
     .input-text{
         width:80%;
         
     }
+}
+
+.submit-info ,.reset-info{
+    width:100px;
+    background-color: skyblue;
+    text-shadow: 2px gray;
+    color:white;
+    height: 30px;
+    font-weight: bold;
+    border: 1px solid white;
+    border-radius: 5%;
+}
+
+.submit-info:hover{
+    border-radius: 10%;
+    box-shadow: 2px 2px 2px 2px white;
+}
+
+.reset-info{
+  background-color:gray;
+}
+
+.errorOutline {
+    border: 1px solid red;
+}
+
+input{
+    height:24px;
+    width:70%;
+    padding: 2px;
 }

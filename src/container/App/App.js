@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
-import './app.css';
 import Selection from '../Selection/Selectioncontainer';
 import Map from '../Map/MapContainer';
+import './app.css';
 
 class App extends Component{
      

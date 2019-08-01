@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { GoogleApiWrapper} from 'google-maps-react';
-import {googleAPIKey } from '../../helper/constant'
 import ButtonControl from '../../components/Button/Button';
 import {startLabel,dropLabel,startPlaceholder,dropPlaceholder } from '../../helper/constant';
 import './InputControl.css'
@@ -124,4 +123,4 @@ class InputControl extends Component{
     }
     
 }
-export default GoogleApiWrapper({apiKey:googleAPIKey})(InputControl)
+export default GoogleApiWrapper({apiKey:process.env.REACT_APP_API_KEY})(InputControl)

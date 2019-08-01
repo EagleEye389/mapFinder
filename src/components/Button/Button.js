@@ -1,8 +1,8 @@
 import React from 'react'
 
-const ButtonControl = ({action,style,label,Isvisible})=>{
+const ButtonControl = ({action,styler,label,Isvisible})=>{
  return (  Isvisible && 
-           <button className={style} onClick={action}>{label}</button>
+           <button className={styler} onClick={action}>{label}</button>
         )
 }
 

@@ -1,4 +1,4 @@
-import Axiosinstance from '../axios/AxiosSetup';
+import Axiosinstance from './axios/AxiosSetup';
 import {API_CONSTANTS} from './constant'
 
 const getToken = async(url, request)=>{

@@ -1,5 +1,7 @@
 import React from 'react';
 import { Map, GoogleApiWrapper,Marker ,Polyline} from 'google-maps-react';
+import PropTypes from 'prop-types';
+
 
 /**
  * @name Mapping
@@ -34,5 +36,11 @@ return (
             </Map>
         )
 
-    }
+}
+
+// Prop required to render this control
+Mapping.propTypes ={
+  path : PropTypes.array.isRequired
+}
+
 export default GoogleApiWrapper({apiKey:process.env.REACT_APP_API_KEY})(Mapping);

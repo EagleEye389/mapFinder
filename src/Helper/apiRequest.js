@@ -5,9 +5,9 @@ import {API_CONSTANTS} from './constant'
 /**
  * @name fetchRoute
  * @description This method fetch the route from the server based on token
- * @param url
- * @param request Object containing source and destination
- * @returns token
+ * @param {{url}} URI
+ * @param {{request}} Object containing source and destination
+ * @returns {{token}} 
  */
 export const getToken = async(url, request)=>{
      const response =   await Axiosinstance.post(url,request);
@@ -18,7 +18,7 @@ export const getToken = async(url, request)=>{
 /**
  * @name getPath
  * @description fetch the token from the server based on the starting and drop-off point
- * @param token
+ * @param {{token}} String A alphbanumeric key
  * @return Route Info
  */
 
@@ -33,9 +33,9 @@ export const getPath = async (token)=>{
  * @name getDirections
  * @description Fetch the directions based on the starting and drop-off point
  * This method first fetch the token and after based on token fetch the routing info
- * @param from Starting Point
- * @param to Drop-off Point
- * @param retryLimit  Retry limit in case status is in progress
+ * @param {{from}} String Starting Point
+ * @param {{to}} String Drop-off Point
+ * @param {{retryLimit}} Number Retry limit in case status is in progress
  */
 export const getDirections = async(origin,destination,retryLimit)=>{
     if(retryLimit<1){

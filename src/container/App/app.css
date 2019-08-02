@@ -9,14 +9,13 @@
   margin-right: 20px;
   height:95vh;
   box-shadow: 5px 5px 5px 5px gray;
-  position: relative;
   display: flex;
   border-radius: 20px;
-  flex-direction: row;
 }
 
 @media screen and (max-width:600px){
   .content{
     margin:0px;
+    padding:10px;
     }
 }

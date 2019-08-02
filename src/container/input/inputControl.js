@@ -1,14 +1,13 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import ButtonControl from '../../components/Button/Button';
 import {START_LABEL,START_PLACEHOLDER,DROP_LABEL,DROP_PLACEHOLDER} from '../../helper/constant';
+import PropTypes from 'prop-types';
 import './inputControl.css'
 
 /**
  * @name InputControl
  * @type {Component}
- * @extends Component React component
- * @description This component is used for autocomplete input and button to manage the map.
+ * @description This component provide autocomplete input and button to manage the map.
  */
 class InputControl extends Component{
   
@@ -49,17 +48,10 @@ class InputControl extends Component{
             this.renderInputAutoComplete();
       }
 
-    
-    static propTypes = {
-      google: PropTypes.object.isRequired,
-      resetMap: PropTypes.func.isRequired,
-      getDirections: PropTypes.func.isRequired,
-    }
-
 /**
  * @name clearInputAutoPlacer
  * @description It will clear the autocomplete input box and reset the map.
- * @param {{inputbox ?}} inputbox an optional string to detect box or map reset click
+ * @param {{inputbox }} String an optional string to detect box or map reset click
  */
     clearInputAutoPlacer = (inputbox)=>{
       // If startpoint cross button is clicked then clear the value and state.
@@ -87,13 +79,14 @@ class InputControl extends Component{
   /**
  * @name handleCrossButton
  * @description It will control the visibility of cross button besides the input box.
- * @param {{box}} box a string to detect whose cross button is clicked.
+ * @param {{box}} String  to detect whose cross button is clicked.
  */
     handleCrossButton = (box)=>{
       /*If  start point input box has value then show the cross button else hide the 
       cross button.*/
           if(box === 'from')          
           { 
+
             if(this.fromInput.value){
                   this.setState({ from:true,emptyErrorFrom:'' })                
              }
@@ -150,10 +143,6 @@ class InputControl extends Component{
   };
 
   
-    /**
-     * Component render method
-     */
-
     render(){
 
          return   (<>  <div className="input-box">
@@ -163,9 +152,7 @@ class InputControl extends Component{
                         
                          <div className="input-box-area">
                              <div className="input-text">    
-                              <input  placeholder={START_PLACEHOLDER} onChange={()=>{
-                                      this.handleCrossButton('from')
-                              }}
+                              <input  placeholder={START_PLACEHOLDER} onChange={()=>{ this.handleCrossButton('from')}}
                                type="text" className={this.state.emptyErrorFrom } ref={el => (this.fromInput = el)} />  
                              </div>
                             <div className="input-text-cross">
@@ -200,5 +187,13 @@ class InputControl extends Component{
     }
     
 }
+
+
+    // Props need to pass to render this control.
+    InputControl.propTypes = {
+      google: PropTypes.object.isRequired,
+      resetMap: PropTypes.func.isRequired,
+      getDirections: PropTypes.func.isRequired,
+    }
 
 export default InputControl

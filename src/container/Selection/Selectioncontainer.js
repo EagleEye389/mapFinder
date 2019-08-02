@@ -1,18 +1,15 @@
 import React , {Component} from 'react';
-
-// import InputControl from '../input/inputControl';
-import InputControl from '../input/initAutoInput'
-
+import InputControl from '../input/initAutoInput';
 import {Loader} from '../../components/Loader/Loader';
-
 import getDirections from '../../helper/apiRequest';
 import {normalizedLocation} from '../../helper/utiltiy';
+import PropTypes from 'prop-types';
 import './selection.css';
 
 /**
  * @type {Component}
  * @name Selection
- * @description Left view of main content to show input and button
+ * @description View to show input and button to manipulate map.
  */
 
 class Selection extends Component{
@@ -46,7 +43,7 @@ class Selection extends Component{
     /**
      * @name changeLoader
      * @description This method display to control loader while calling api to fetch data.
-     * @param isLoading Boolean value to control loader state.
+     * @param {{isLoading}} Boolean value to control loader state.
      */
 
     changeLoader = isLoading => {
@@ -59,7 +56,7 @@ class Selection extends Component{
     /**
      * @name displayErrorMessage
      * @description This method display the error message and hide loader.
-     * @param message Message to be displayed
+     * @param {{message}} String Message to be displayed
      */
 
     displayErrorMessage = (message)=>{ 
@@ -73,8 +70,8 @@ class Selection extends Component{
      * @description This method is calling api to get path , total 
      * distance and total time and same updated in the state to refresh map.
      * In case of any error it will same update in state. 
-     * @param from Passing origin 
-     * @param to  Passing destination
+     * @param {{from}} String Passing origin 
+     * @param {{to}} String  Passing destination
      */
     handleSubmission=async(from ,to)=>{
           this.changeLoader(true);
@@ -107,7 +104,6 @@ class Selection extends Component{
     
     } 
 
-    
     /**
      * @description Render method of the component
      */
@@ -125,4 +121,11 @@ class Selection extends Component{
         </div>)
     }
 }
+
+
+Selection.propTypes = {
+    resetMap: PropTypes.func.isRequired,
+    updatePath: PropTypes.func.isRequired,
+}
+
 export default Selection;

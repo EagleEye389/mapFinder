@@ -3,8 +3,13 @@ import Selection from '../selection/selectionContainer';
 import Map from '../map/mapContainer';
 import './app.css';
 
+/**
+ * @type {Component}
+ * @name APP
+ * @description Main container.
+ */
 class App extends Component{
-     
+
   state = {
       path:[]
   }
@@ -12,7 +17,7 @@ class App extends Component{
     /**
      * @name updateMap
      * @description This method to update path to draw polyline between source and destination
-     * @param path Array of latitude and logtitude.
+     * @param {{path}} Array of latitude and logtitude.
      */
 
   updateMap=(path)=>{

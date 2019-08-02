@@ -1,7 +1,7 @@
 /**
  * @name normalizedLocation
  * @description This method reconstruct path receive from api calls.
- * @param path Array 
+ * @param {{path}} Array 
  * @returns Modified path array
  */
 export const normalizedLocation=(path)=>{

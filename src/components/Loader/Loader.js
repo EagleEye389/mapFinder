@@ -1,10 +1,12 @@
 import React from "react";
 import "./Loader.css";
+import PropTypes from 'prop-types';
+
 
 /**
  * @name Loader
  * @type {Component}
- * @description Loader control use during api calls
+ * @description Show a loader on screen during api calls or async operations.
  * @param {{isLoading}} Object Props to stateless component
  * @returns {JSX}
  */
@@ -17,6 +19,11 @@ const Loader = ({ isLoading }) =>{
       </div>
     )
   );
+}
+
+// Prop type need to render this component
+Loader.propTypes ={
+  isLoading:PropTypes.bool.isRequired
 }
 
 export { Loader };

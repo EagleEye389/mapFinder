@@ -11,7 +11,7 @@ const test =()=> a++;
 describe('Button component is hidden check',()=>{
      
     beforeEach(() => {
-        component = shallow(<Button isvisible={false} />);
+        component = shallow(<Button isvisible={false} handleClick={()=>null} label ="" />);
       });
         
     it('Button is hidden', () => {

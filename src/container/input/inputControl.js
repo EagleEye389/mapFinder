@@ -26,7 +26,9 @@ class InputControl extends Component{
    state= {
      from:false,
      to:false,
-     submitLabel:'Submit'
+     submitLabel:'Submit',
+     emptyErrorFrom:'',
+     emptyErrorTo:''
    }
    
    /**
@@ -71,7 +73,7 @@ class InputControl extends Component{
          else{
           this.toInput.value = "";
           this.fromInput.value = "";
-          this.setState({     to:false,from:false ,submitLabel:'Submit',emptyErrorFrom:"" ,emptyErrorTo:""});        
+          this.setState({     to:false,from:false ,submitLabel:'Submit',emptyErrorFrom:'' ,emptyErrorTo:''});        
           this.props.resetMap();
          }
     }
@@ -86,7 +88,6 @@ class InputControl extends Component{
       cross button.*/
           if(box === 'from')          
           { 
-
             if(this.fromInput.value){
                   this.setState({ from:true,emptyErrorFrom:'' })                
              }

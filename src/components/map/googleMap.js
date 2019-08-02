@@ -21,7 +21,7 @@ return (
           center={path ? path[0] :{}}
           
         >
-           { path && path.length >0  &&    <Marker position={path[0]} /> }
+           { path && path.length >0  &&   <Marker position={path[0]} /> }
            {path && path.length >0  &&    <Marker position={path[path.length-1]} strokeColor="blue" /> 
        
             }

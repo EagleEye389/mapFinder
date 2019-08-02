@@ -21,12 +21,12 @@ return (
           center={path ? path[0] :{}}
           
         >
-           { path && path.length >0  &&   <Marker position={path[0]} /> }
-           {path && path.length >0  &&    <Marker position={path[path.length-1]} strokeColor="blue" /> 
+           {path && path.length   && <Marker position={path[0]} title="Start point"  /> }
+           {path && path.length  &&  <Marker position={path[path.length-1]} title="Drop off point" /> 
        
             }
-            
-              {path && path.length &&     
+                       
+             { path && path.length &&     
                <Polyline
                     path={path}
                     strokeColor="#0000FF"

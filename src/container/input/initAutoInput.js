@@ -1,5 +1,5 @@
 import { GoogleApiWrapper} from 'google-maps-react';
-import InputControl from './inputControl';
+import InputControl from './InputControl';
 
 /**
   * @description provide google api props to manipulate map to wrapped component

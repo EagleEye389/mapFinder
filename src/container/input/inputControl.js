@@ -1,7 +1,11 @@
 import React, {Component} from 'react';
-import ButtonControl from '../../components/Button/Button';
-import {START_LABEL,START_PLACEHOLDER,DROP_LABEL,DROP_PLACEHOLDER} from '../../helper/constant';
 import PropTypes from 'prop-types';
+
+import CrossButton from '../../components/CrossButton/CrossButton';
+import ButtonControl from '../../components/Button/Button';
+
+import {START_LABEL,START_PLACEHOLDER,DROP_LABEL,DROP_PLACEHOLDER} from '../../helper/constant';
+
 import './inputControl.css'
 
 /**
@@ -11,25 +15,25 @@ import './inputControl.css'
  */
 class InputControl extends Component{
   
-  // starting point input reference is saved here.
-   fromInput;
-   //drop off input reference is saved here.
-   toInput;
+      // starting point input reference is saved here.
+     fromInput;
 
-   // starting point is saved when google autocomplete query is done.
-   fromAutoComplete;
+      //drop off input reference is saved here.
+     toInput;
+     
+     // starting point is saved when google autocomplete query is done.
+     fromAutoComplete;
 
-   // drop off point is saved when google autocomplete query is done.  
-   toAutoComplete;   
+    // drop off point is saved when google autocomplete query is done.  
+     toAutoComplete;
 
+     state= {
+       from:false,
+       to:false,
+       submitLabel:'Submit'       
+     }
+   
    // Initial State
-   state= {
-     from:false,
-     to:false,
-     submitLabel:'Submit',
-     emptyErrorFrom:'',
-     emptyErrorTo:''
-   }
    
    /**
      * @name renderInputAutoComplete
@@ -41,12 +45,7 @@ class InputControl extends Component{
             this.toAutoComplete = new maps.places.Autocomplete(this.toInput);
     };
     
-
-    /**
-     * Component lifecycle hook
-     */
-
-    componentDidMount() {
+   componentDidMount() {
             this.renderInputAutoComplete();
       }
 
@@ -73,7 +72,7 @@ class InputControl extends Component{
          else{
           this.toInput.value = "";
           this.fromInput.value = "";
-          this.setState({     to:false,from:false ,submitLabel:'Submit',emptyErrorFrom:'' ,emptyErrorTo:''});        
+          this.setState({     to:false,from:false ,submitLabel:'Submit'});        
           this.props.resetMap();
          }
     }
@@ -89,7 +88,7 @@ class InputControl extends Component{
           if(box === 'from')          
           { 
             if(this.fromInput.value){
-                  this.setState({ from:true,emptyErrorFrom:'' })                
+                  this.setState({ from:true})                
              }
           else{
             this.setState({  from:false  })
@@ -100,12 +99,14 @@ class InputControl extends Component{
           if(box === 'to')
           {
             if(this.toInput.value){
-                this.setState({   to:true ,emptyErrorTo:''   })
+                this.setState({   to:true   })
                }
           else{
             this.setState({     to:false  })
                }
           }
+
+          
     }
 
 
@@ -125,63 +126,83 @@ class InputControl extends Component{
           this.props.getDirections(from, to);        
 
       }
-      else{
-
-           if(!this.fromInput.value){
-              this.setState({
-                  emptyErrorFrom:"errorOutline",
-                  
-              })
-           }
-           if(!this.toInput.value)
-           {
-              this.setState({
-                  emptyErrorTo:"errorOutline"
-              })
-
-           }
-      }
   };
 
   
     render(){
 
-         return   (<>  <div className="input-box">
-                        <div className="input-box-label">
-                        <label>{START_LABEL}</label>
-                        </div>
-                        
-                         <div className="input-box-area">
-                             <div className="input-text">    
-                              <input  placeholder={START_PLACEHOLDER} onChange={()=>{ this.handleCrossButton('from')}}
-                               type="text" className={this.state.emptyErrorFrom } ref={el => (this.fromInput = el)} />  
+         return   (<>  
+                  <div className="form-area">
+                          <div className="row">
+                                  <div className="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                     <span><label>{START_LABEL}</label></span>
+                                  </div>
+                          </div>
+                          
+                          <div className="row mt-1">
+                             
+                                
+                             <div className="col-10 col-xs-10 col-md-10 col-sm-10 col-lg-10">
+                               <div className="form-group">
+                                <input type="text"
+                                placeholder={START_PLACEHOLDER} 
+                                onChange={()=>{ this.handleCrossButton('from')}}
+                                className={this.state.emptyErrorFrom+ ' form-control' } 
+                                ref={e1=>this.fromInput=e1} /> 
+                               </div>
                              </div>
-                            <div className="input-text-cross">
-                              <ButtonControl label="X" handleClick={()=>{this.clearInputAutoPlacer('from')}} isvisible={this.state.from} />
-                            </div>
-                         </div>
-                      </div>
-                      <div className="input-box">
-                        <div className="input-box-label">
-                        <label>{DROP_LABEL}</label>
-                        </div>
-                        
-                         <div className="input-box-area">
-                             <div className="input-text">                                
-                               <input  placeholder={DROP_PLACEHOLDER} className={this.state.emptyErrorTo} onChange={()=>this.handleCrossButton('to')}
-                                 type="text" ref={el => (this.toInput = el)} />  
+                             <div className="col-2 col-xs-2 col-md-2 col-sm-2 col-lg-2">
+                                 <CrossButton name="source" 
+                                 onChangeInput={()=>{this.clearInputAutoPlacer('from')}}
+                                  value={this.state.from} />
                              </div>
-                            <div className="input-text-cross">
-                              <ButtonControl label="X" handleClick={()=>this.clearInputAutoPlacer('to')} isvisible={this.state.to}/>
-                            </div>
-                         </div>
-                        </div>
+                          </div> 
+                          
 
-                         <div className="input-box-button">
-                         <ButtonControl label={this.state.submitLabel}   styler="submit-info" handleClick={this.getRoute} />
-                         <ButtonControl label="Reset" styler="reset-info" handleClick={this.clearInputAutoPlacer}/>                                                       
+                          <div className="row">
+                                  <div className="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                     <span><label>{DROP_LABEL}</label></span>
+                                  </div>
+                          </div>
+                          
+                          <div className="row mt-1">
+                             
+                                
+                             <div className="col-10 col-xs-10 col-md-10 col-sm-10 col-lg-10">
+                               <div className="form-group">
+                             <input type="text" placeholder={DROP_PLACEHOLDER} 
+                               className={this.state.emptyErrorTo +' form-control'} 
+                               onChange={()=>this.handleCrossButton('to')}
+                                  ref={e1=>this.toInput=e1} /> 
+                             </div>
+                             </div>
+                             <div className="col-2 col-xs-2 col-md-2 col-sm-2 col-lg-2">
+                             <CrossButton label="X"
+                               name="destination"
+                                onChangeInput={()=>this.clearInputAutoPlacer('to')}
+                                 value={this.state.to}/>
+                             </div>
+                          </div> 
+                          </div>
+
+                   
+                      <div className="row mt-2">
+                        <div className="col-5 col-sm-5 col-xs-5 col-md-5
+                         col-md-offset-1 col-sm-offset-1 col-xs-offset-1 col-lg-offset-1">
+                        <ButtonControl 
+                             label={this.state.submitLabel}  
+                             type="btn btn-primary" 
+                             disableCheck= {!(this.state.from && this.state.to )}
+                             handleClick={this.getRoute} />
                         </div>
-         
+                        <div className="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                         <ButtonControl label="Reset" 
+                               type="btn btn-secondary" 
+                               disableCheck={!(this.state.from && this.state.to)}
+                               handleClick={this.clearInputAutoPlacer}/>
+                        </div>         
+                      </div>
+           
                       </>
                 
       )

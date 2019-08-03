@@ -1,10 +1,10 @@
 import React from 'react';
-import InputControl from '../../container/input/inputControl';
+import InputControl from '../../container/input/InputControl';
 import {mount} from 'enzyme';
 
 let component;
 let array = [1,2,3]
-let input ,inputInstance;
+let input1 ,input1Instance,input2,input2Instance;
 let resetArray =()=>{
      array.length = 0;
 }
@@ -15,39 +15,35 @@ describe('Input Control Functionality Check', ()=>{
         );
         beforeEach(()=>{
          
-        input  = component.find('input').first(),
-        inputInstance =  input.instance()
+        input1  = component.find('input').at(0),
+        input1Instance =  input1.instance(),
+        input2 = component.find('input').at(1),
+        input2Instance = input2.instance()
         })
 
         it("Input is working properly",()=>{
-           inputInstance.value = 'test'; 
-           input.simulate('change', { target :{value:'test'}})  
-           expect(component.state("from")).toBeTruthy();    
-           expect(component.state("emptyErrorFrom")).toBe("");    
-
+           input1Instance.value = 'test'; 
+           input1.simulate('change', { target :{value:'test'}})  
+           expect(component.state("from")).toBeTruthy();  
         })
 
         
-        it("Clear button is visible when input is present",()=>{            
-            inputInstance.value = 'test'; 
-            input.simulate('change', { target :{value:'test'}});
+        it("Cross button is visible when input is present",()=>{            
+            input1Instance.value = 'test'; 
+            input1.simulate('change', { target :{value:'test'}});
             expect(component.find('button').first()).toBeTruthy();  
  
          })
 
          it("Reset button clear the state and map",()=>{
-            inputInstance.value = 'test'; 
-            input.simulate('change', { target :{value:'test'}});
-            component.find('button').at(2).simulate('click')
-            expect(component.state("from")).toBeFalsy();  
-            expect(inputInstance.value).toBe('')
-            expect(array.length).toBe(0);
- 
-         })
-         it("Submit button check for empty input",()=>{
-            component.find('button').at(0).simulate('click');
-            expect(component.state('emptyErrorFrom')).toBe('errorOutline');
-
+            input1Instance.value = 'test'; 
+            input1.simulate('change', { target :{value:'test'}});            
+            input2Instance.value = 'test'; 
+            input2.simulate('change', { target :{value:'test'}});
+            component.find('button').at(1).simulate('click')
+            expect(component.state('from')).toBeFalsy();  
+            expect(input1Instance.value).toBe('')
+            expect(array.length).toBe(0); 
          })
 
 

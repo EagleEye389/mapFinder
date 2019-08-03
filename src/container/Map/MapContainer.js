@@ -14,9 +14,11 @@ import './map.css';
  */
 const MapControl = ({path}) =>{
        return(
-        <div className="map-area">
-            <Map path={path} />
-         </div>
+             
+               <div className="map-area">
+                      <Map path={path} />
+            </div>
+
        )
 
 }

@@ -1,6 +1,8 @@
 import React,{Component} from 'react';
-import Selection from '../selection/selectionContainer';
-import Map from '../map/mapContainer';
+
+import Selection from '../selection/SelectionContainer';
+import Map from '../map/MapContainer';
+
 import './app.css';
 
 /**
@@ -34,10 +36,18 @@ class App extends Component{
   render(){
 
     return (
-      <div className="app">    
-       <div className="content"> 
+      <div className="app"> 
+        <div className="container"> 
+        <div className="content">
+        <div className="row">
+          <div className="col-xs-12 col-md-4 col-sm-12 col-lg-4">
           <Selection updatePath={this.updateMap} resetMap={this.resetMap}/>
+          </div>
+          <div className="col-xs-12 col-md-8 col-sm-12 col-lg-8">
           <Map path={this.state.path}/>
+          </div>
+          </div>
+          </div>
         </div>
       </div>     
     )

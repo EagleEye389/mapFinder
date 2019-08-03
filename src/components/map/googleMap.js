@@ -1,6 +1,8 @@
 import React from 'react';
-import { Map, GoogleApiWrapper,Marker ,Polyline} from 'google-maps-react';
 import PropTypes from 'prop-types';
+
+import { Map, GoogleApiWrapper,Marker ,Polyline} from 'google-maps-react';
+import { relative } from 'path';
 
 
 /**
@@ -17,8 +19,8 @@ return (
    <Map
           google={google}
           zoom={12}
-          style={{width:'100%' ,height:'100%'}}
-          center={path ? path[0] :{}}
+          style={{width:'100%' ,height:'100%',position:relative,borderTopRightRadius:'20px',borderBottomRightRadius:'20px'}}
+          center={path ? path[0] :{lat:20.5937,lng:78.9629}}
           
         >
            {path && path.length   && <Marker position={path[0]} title="Start point"  /> }

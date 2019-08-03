@@ -17,7 +17,7 @@ const mockTokenResponse = {
   token: "token"
 };
 
-describe("Test for directions api", () => {
+describe("Tests for directions api", () => {
   it("Should test for getToken method", async () => {
     const post = jest.spyOn(axiosInstance, "post");
     const url =  API_CONSTANTS.route;

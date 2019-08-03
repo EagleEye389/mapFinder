@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-import {Loader } from "../../components/Loader/Loader";
+import {Loader } from "../Loader/Loader";
 
 let component;
 

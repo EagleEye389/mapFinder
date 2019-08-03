@@ -1,9 +1,11 @@
 import React , {Component} from 'react';
-import InputControl from '../input/initAutoInput';
+import PropTypes from 'prop-types';
+
+import InputControl from '../input/InitAutoInput';
 import {Loader} from '../../components/Loader/Loader';
 import getDirections from '../../helper/apiRequest';
 import {normalizedLocation} from '../../helper/utiltiy';
-import PropTypes from 'prop-types';
+
 import './selection.css';
 
 /**
@@ -19,7 +21,6 @@ class Selection extends Component{
            errorMsg:'',
            time:'',
            distance:'',
-           path : [],
            isLoading:false
     }
 
@@ -33,8 +34,7 @@ class Selection extends Component{
         this.setState({
           time:"",
           distance:"",
-          errorMsg:"",
-          path:[]
+          errorMsg:""
         })
         this.props.resetMap();
       }
@@ -60,7 +60,6 @@ class Selection extends Component{
      */
 
     displayErrorMessage = (message)=>{ 
-          this.changeLoader(false);
           this.setState({errorMsg:message,time:'',distance:''})
      }
 
@@ -73,33 +72,33 @@ class Selection extends Component{
      * @param {{from}} String Passing origin 
      * @param {{to}} String  Passing destination
      */
-    handleSubmission=async(from ,to)=>{
+    handleSubmission = async(from ,to)=>{
           this.changeLoader(true);
 
           if(from && to){  
-            let response =  await getDirections(from,to,2).catch(e=>{
+            await getDirections(from,to,2).then((response)=>{
+                const {error ,path} = response
+                if(error){
+                    this.displayErrorMessage(response.error);
+                    return;
+                }     
+                if(path)
+                {    
+                    let path = normalizedLocation(response.path);
+                     this.setState({
+                          time : response.total_time,
+                          distance: response.total_distance,
+                          errorMsg:''
+                     });
+     
+                     this.props.updatePath(path);
+                }
+
+            }).catch(e=>{
                 this.displayErrorMessage('Internal server error');
             });
-
-            this.changeLoader(false);
- 
-           if(response && response.error){
-               this.displayErrorMessage(response.error);
-               return;
-           }
-
-           if(response && response.path)
-           {    
-               let path = normalizedLocation(response.path);
-                this.setState({
-                     path: path,
-                     time : response.total_time,
-                     distance: response.total_distance,
-                     errorMsg:''
-                });
-
-                this.props.updatePath(path);
-           }
+            this.changeLoader(false); 
+          
         }  
     
     } 
@@ -109,16 +108,29 @@ class Selection extends Component{
      */
     render(){
         return (
-        <div className="form-area">
-            <Loader isLoading={this.state.isLoading} />
-            <InputControl getDirections = {this.handleSubmission} resetMap = { this.handleResetHandler }/>
-                      
-            <div className="input-box-message">
-                {this.state.distance && <div>total distance : {this.state.distance}</div>}
-                {this.state.time && <div>total time : {this.state.time }</div>}
-                <span className="error">{this.state.errorMsg}</span>
-             </div>               
-        </div>)
+           <>
+
+           <Loader isLoading={this.state.isLoading} />         
+            
+                
+                <div className="row mt-1">
+                    <div className="col-xs-12 col-12 col-md-12 col-sm-12 col-lg-12">
+                     <InputControl getDirections = {this.handleSubmission} resetMap = { this.handleResetHandler }/>
+                    </div>
+
+                </div>
+                <div className="row mt-2"> 
+                 <div className="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-md-offset-1" >
+                  {this.state.distance && <div>total distance : {this.state.distance}</div>}
+                  {this.state.time && <div>total time : {this.state.time }</div>}
+                  <span className="text-danger">{this.state.errorMsg}</span>
+
+                     </div>        
+                </div> 
+           
+        
+        </>
+        )
     }
 }
 

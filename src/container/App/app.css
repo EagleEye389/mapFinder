@@ -1,21 +1,24 @@
 .app {
   margin:0;
   padding: 0;
-  font-size: 17px;
+  font-size: 16px;
 }
 
 .content{
-  margin-left: 20px;
-  margin-right: 20px;
-  height:95vh;
-  box-shadow: 5px 5px 5px 5px gray;
-  display: flex;
+  height:95%;
+  box-shadow: 5px 5px 5px 8px gray;
   border-radius: 20px;
+  padding: 0px;
+  position: relative;
+  margin-top:10px;
 }
 
-@media screen and (max-width:600px){
-  .content{
-    margin:0px;
-    padding:10px;
-    }
+.mt-1{
+  margin-bottom:10px;
+}
+.mt-2{
+  margin-top:35px;
+}
+.mt-0{
+  margin:0px;
 }

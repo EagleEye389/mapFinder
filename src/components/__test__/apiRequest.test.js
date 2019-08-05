@@ -17,6 +17,14 @@ const mockTokenResponse = {
   token: "token"
 };
 
+const mockDirectionResponseRetry = {
+  status :"in progress"
+}
+
+const retryLimit= 2;
+
+const message = "Server is busy, Kindly try after some time."
+
 describe("Tests for directions api", () => {
   it("Should test for getToken method", async () => {
     const post = jest.spyOn(axiosInstance, "post");
@@ -42,12 +50,12 @@ describe("Tests for directions api", () => {
     const result = await ApiHandler.getPath("token");
     expect(result).toBeDefined();
     expect(result.status).toEqual("success");
+    expect(result.total_distance).toEqual(20000);
     get.mockRestore();
   });
 
   it("Should test for getDirections method", async () => {
-    const get = jest.spyOn(axiosInstance, "get");
-    
+    const get = jest.spyOn(axiosInstance, "get");    
     const post = jest.spyOn(axiosInstance, "post");
 
     post.mockImplementation(() =>
@@ -64,9 +72,30 @@ describe("Tests for directions api", () => {
       })
     );
 
-    const result = await ApiHandler.getDirections("from", "to",2);
+    const result = await ApiHandler.getDirections("from", "to", retryLimit);
     expect(result).toBeDefined();
     expect(result.status).toEqual("success");
+  });
+
+  it("Should test for getDirections method retry check", async () => {
+    const post = jest.spyOn(axiosInstance, "post");
+    const get = jest.spyOn(axiosInstance, "get");    
+    post.mockImplementation(() =>
+      Promise.resolve({
+        data: {
+          token: "token"
+        }
+      })
+    );
+
+    get.mockImplementation(() =>
+      Promise.resolve({
+        data: mockDirectionResponseRetry
+      })
+    );
+
+    const result = await ApiHandler.getDirections("from", "to", retryLimit);
+    expect(result.error).toEqual(message)
   });
 });
 

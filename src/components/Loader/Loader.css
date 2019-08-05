@@ -10,7 +10,8 @@
   .loader-box > .loader {
     position: absolute;
     margin:auto;
-    background-color: rgb(104, 104, 211);
+    background: rgb(5,50,241);
+    background: linear-gradient(90deg, rgba(5,50,241,0.8748541652989321) 40%, rgba(252,176,69,1) 95%);
     top:0;
     bottom: 0;
     left:0;
@@ -37,8 +38,11 @@
     80%{
       transform: scale(0.9)
     }
+    90%{
+      transform: scale(1.0)
+    }
     100% {
-      transform: scale(1);
+      transform: scale(1.2);
     }
   }
   

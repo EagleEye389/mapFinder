@@ -10,7 +10,8 @@ let resetArray =()=>{
 }
 describe('Input Control Functionality Check', ()=>{
        beforeEach(() => {
-        component = mount(<InputControl  google={{}} resetMap={() => resetArray()} getDirections={() => null} /> )}
+        component = mount(<InputControl  google={{}} resetMap={() => resetArray()} 
+        getDirections={() => Promise.resolve({})} /> )}
 
         );
         beforeEach(()=>{
@@ -22,24 +23,25 @@ describe('Input Control Functionality Check', ()=>{
         })
 
         it("Input is working properly",()=>{
-           input1Instance.value = 'test'; 
-           input1.simulate('change', { target :{value:'test'}})  
+           input1Instance.value = 'india'; 
+           input1.simulate('change', { target :{value:'india'}})  
            expect(component.state("from")).toBeTruthy();  
         })
 
         
         it("Cross button is visible when input is present",()=>{            
-            input1Instance.value = 'test'; 
-            input1.simulate('change', { target :{value:'test'}});
+            input1Instance.value = 'india'; 
+            
+            input1.simulate('change', { target :{value:'india'}});
             expect(component.find('button').first()).toBeTruthy();  
  
          })
 
          it("Reset button clear the state and map",()=>{
-            input1Instance.value = 'test'; 
-            input1.simulate('change', { target :{value:'test'}});            
-            input2Instance.value = 'test'; 
-            input2.simulate('change', { target :{value:'test'}});
+            input1Instance.value = 'india'; 
+            input1.simulate('change', { target :{value:'india'}});            
+            input2Instance.value = 'india'; 
+            input2.simulate('change', { target :{value:'india'}});
             component.find('button').at(1).simulate('click')
             expect(component.state('from')).toBeFalsy();  
             expect(input1Instance.value).toBe('')

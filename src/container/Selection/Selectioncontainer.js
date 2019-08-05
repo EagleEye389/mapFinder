@@ -2,7 +2,6 @@ import React , {Component} from 'react';
 import PropTypes from 'prop-types';
 
 import InputControl from '../input/InitAutoInput';
-import {Loader} from '../../components/Loader/Loader';
 import getDirections from '../../helper/apiRequest';
 import {normalizedLocation} from '../../helper/utiltiy';
 
@@ -20,9 +19,8 @@ class Selection extends Component{
     state = {
            errorMsg:'',
            time:'',
-           distance:'',
-           isLoading:false
-    }
+           distance:''
+        }
 
     
     /**
@@ -40,19 +38,7 @@ class Selection extends Component{
       }
 
     
-    /**
-     * @name changeLoader
-     * @description This method display to control loader while calling api to fetch data.
-     * @param {{isLoading}} Boolean value to control loader state.
-     */
-
-    changeLoader = isLoading => {
-        this.setState(() => ({
-            isLoading
-        }));
-    };
-
-    
+        
     /**
      * @name displayErrorMessage
      * @description This method display the error message and hide loader.
@@ -60,6 +46,7 @@ class Selection extends Component{
      */
 
     displayErrorMessage = (message)=>{ 
+          this.props.changeLoader(false);
           this.setState({errorMsg:message,time:'',distance:''})
      }
 
@@ -73,9 +60,9 @@ class Selection extends Component{
      * @param {{to}} String  Passing destination
      */
     handleSubmission = async(from ,to)=>{
-          this.changeLoader(true);
-
-          if(from && to){  
+        
+        if(from && to){  
+            this.props.changeLoader(true);
             await getDirections(from,to,2).then((response)=>{
                 const {error ,path} = response
                 if(error){
@@ -97,7 +84,7 @@ class Selection extends Component{
             }).catch(e=>{
                 this.displayErrorMessage('Internal server error');
             });
-            this.changeLoader(false); 
+            this.props.changeLoader(false); 
           
         }  
     
@@ -108,10 +95,7 @@ class Selection extends Component{
      */
     render(){
         return (
-           <>
-
-           <Loader isLoading={this.state.isLoading} />         
-            
+           <>            
                 
                 <div className="row mt-1">
                     <div className="col-xs-12 col-12 col-md-12 col-sm-12 col-lg-12">
@@ -138,6 +122,7 @@ class Selection extends Component{
 Selection.propTypes = {
     resetMap: PropTypes.func.isRequired,
     updatePath: PropTypes.func.isRequired,
+    changeLoader:PropTypes.func.isRequired
 }
 
 export default Selection;

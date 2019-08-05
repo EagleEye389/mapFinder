@@ -1,6 +1,6 @@
 import * as ApiHandler from "../../helper/apiRequest";
-import axiosInstance from '../../helper/axios/AxiosSetup';
 import {API_CONSTANTS} from '../../helper/constant';
+import axiosInstance from '../../helper/axios/axiosSetup'
 
 const mockDirectionResponse = {
   status: "success",
@@ -47,6 +47,7 @@ describe("Tests for directions api", () => {
 
   it("Should test for getDirections method", async () => {
     const get = jest.spyOn(axiosInstance, "get");
+    
     const post = jest.spyOn(axiosInstance, "post");
 
     post.mockImplementation(() =>

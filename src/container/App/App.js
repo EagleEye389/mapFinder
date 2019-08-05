@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 
 import Selection from '../selection/SelectionContainer';
 import Map from '../map/MapContainer';
+import {Loader} from '../../components/Loader/Loader';
 
 import './app.css';
 
@@ -13,7 +14,8 @@ import './app.css';
 class App extends Component{
 
   state = {
-      path:[]
+      path:[],
+      isLoading:false
   }
    
     /**
@@ -33,15 +35,25 @@ class App extends Component{
   resetMap =()=>{
      this.setState({path:[]})
   }
+
+   /**
+     * @name changeLoader
+     * @description This method to reset loader.     
+     */
+    changeLoader =(isLoading)=>{
+      this.setState({isLoading})
+   }
+
   render(){
 
     return (
       <div className="app"> 
         <div className="container"> 
         <div className="content">
+          <Loader isLoading={this.state.isLoading} />
         <div className="row">
           <div className="col-xs-12 col-md-4 col-sm-12 col-lg-4">
-          <Selection updatePath={this.updateMap} resetMap={this.resetMap}/>
+          <Selection updatePath={this.updateMap} resetMap={this.resetMap} changeLoader={this.changeLoader}/>
           </div>
           <div className="col-xs-12 col-md-8 col-sm-12 col-lg-8">
           <Map path={this.state.path}/>

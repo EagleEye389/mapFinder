@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import InputControl from "../input/initAutoInput";
+import InputControl from "../input/InitAutoInput";
 import getDirections from "../../helper/apiRequest";
 import { normalizedLocation } from "../../helper/utiltiy";
 import { TIME_LABEL, DISTANCE_LABEL } from "../../helper/constant";

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import Map from "../../components/map/googleMap";
+import Map from "../../components/map/GoogleMap";
 
 import "./map.css";
 

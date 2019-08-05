@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
-import Selection from "../selection/selectionContainer";
-import Map from "../map/mapContainer";
-import Loader from "../../components/loader/loader";
+import Selection from "../selection/SelectionContainer";
+import Map from "../map/MapContainer";
+import Loader from "../../components/loader/Loader";
 
 import "./app.css";
 

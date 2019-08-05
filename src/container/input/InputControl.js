@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import CrossButton from "../../components/crossbutton/CrossButton";
-import ButtonControl from "../../components/button/button";
+import ButtonControl from "../../components/button/Button";
 
 import {
   START_LABEL,

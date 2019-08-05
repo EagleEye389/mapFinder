@@ -1,0 +1,30 @@
+.app {
+  margin:0;
+  padding: 0;
+  font-size: 16px;
+}
+
+.content{
+  height:100%;
+  box-shadow: -5px -5px 25px -25px gray,5px 5px 25px 5px lightgray;
+  border-radius: 20px;
+  padding: 0px;
+  position: relative;
+  margin-top:20px;
+}
+
+.mt-1{
+  margin-top:5px;
+}
+.mt-2{
+  margin-top:10px;
+}
+.mt-3{
+ margin-top:15px;
+}
+.mb-1{
+  margin-bottom: 15px;
+}
+.placement{
+  margin-left:-26px;
+}

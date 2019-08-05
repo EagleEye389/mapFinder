@@ -1,8 +1,7 @@
-import React from "react";
-import PropTypes from 'prop-types';
+import React from "./node_modules/react";
+import PropTypes from "./node_modules/prop-types";
 
 import "./Loader.css";
-
 
 /**
  * @name Loader
@@ -12,7 +11,7 @@ import "./Loader.css";
  * @returns {JSX}
  */
 
-const Loader = ({ isLoading }) =>{
+const Loader = ({ isLoading }) => {
   return (
     isLoading && (
       <div className="loader-box">
@@ -20,11 +19,11 @@ const Loader = ({ isLoading }) =>{
       </div>
     )
   );
-}
+};
 
 // Prop type need to render this component
-Loader.propTypes ={
-  isLoading:PropTypes.bool.isRequired
-}
+Loader.propTypes = {
+  isLoading: PropTypes.bool.isRequired
+};
 
 export { Loader };

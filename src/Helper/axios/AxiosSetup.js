@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "./node_modules/axios";
 
 /**
  * @name instance
@@ -6,8 +6,8 @@ import axios from 'axios';
  * @returns axios instance
  */
 const instance = axios.create({
-    baseURL: process.env.REACT_APP_BASE_URL,
-    headers: {'Content-Type': 'application/json'}
-  });
+  baseURL: process.env.REACT_APP_BASE_URL,
+  headers: { "Content-Type": "application/json" }
+});
 
 export default instance;

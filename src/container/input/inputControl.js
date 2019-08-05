@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import CrossButton from "../../components/CrossButton/crossButton";
+import CrossButton from "../../components/crossbutton/CrossButton";
 import ButtonControl from "../../components/button/button";
 
 import {

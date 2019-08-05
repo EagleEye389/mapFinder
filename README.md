@@ -16,13 +16,12 @@ Technologies Used:
 npm install
 ```
 
-Change MockApi Urls in src/config/apiConstant file
-
 Add a `.env` file with the following:
 
 ```
 REACT_APP_GOOGLE_API_KEY = <api-key>
-REACT_APP_API_KEY = <mock-api-url>
+REACT_APP_BASE_URL = <mock-api-url>
+REACT_APP_RETRY_LIMIT = <Number>
 ```
 
 ## Run Tests

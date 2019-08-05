@@ -53,7 +53,10 @@ class App extends Component{
           <Loader isLoading={this.state.isLoading} />
         <div className="row">
           <div className="col-xs-12 col-md-4 col-sm-12 col-lg-4">
-          <Selection updatePath={this.updateMap} resetMap={this.resetMap} changeLoader={this.changeLoader}/>
+          <Selection 
+            updatePath={this.updateMap}
+            resetMap={this.resetMap} 
+            changeLoader={this.changeLoader}/>
           </div>
           <div className="col-xs-12 col-md-8 col-sm-12 col-lg-8">
           <Map path={this.state.path}/>

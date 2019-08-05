@@ -63,7 +63,7 @@ class Selection extends Component{
         
         if(from && to){  
             this.props.changeLoader(true);
-            await getDirections(from,to,2).then((response)=>{
+            await getDirections(from,to,process.env.REACT_APP_RETRY_LIMIT).then((response)=>{
                 const {error ,path} = response
                 if(error){
                     this.displayErrorMessage(response.error);
@@ -99,12 +99,14 @@ class Selection extends Component{
                 
                 <div className="row mt-1">
                     <div className="col-xs-12 col-12 col-md-12 col-sm-12 col-lg-12">
-                     <InputControl getDirections = {this.handleSubmission} resetMap = { this.handleResetHandler }/>
+                     <InputControl
+                      getDirections = {this.handleSubmission} 
+                      resetMap = { this.handleResetHandler }/>
                     </div>
 
                 </div>
                 <div className="row mt-2"> 
-                 <div className="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-md-offset-1" >
+                 <div className="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-md-offset-1 col-sm-offset-1 col-xs-offset-1" >
                   {this.state.distance && <div>total distance : {this.state.distance}</div>}
                   {this.state.time && <div>total time : {this.state.time }</div>}
                   <span className="text-danger">{this.state.errorMsg}</span>
@@ -122,7 +124,6 @@ class Selection extends Component{
 Selection.propTypes = {
     resetMap: PropTypes.func.isRequired,
     updatePath: PropTypes.func.isRequired,
-    changeLoader:PropTypes.func.isRequired
+    changeLoader : PropTypes.func.isRequired
 }
-
 export default Selection;

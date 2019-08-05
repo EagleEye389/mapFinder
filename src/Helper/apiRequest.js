@@ -38,7 +38,7 @@ export const getPath = async (token)=>{
  * @param {{retryLimit}} Number Retry limit in case status is in progress
  */
 export const getDirections = async(origin,destination,retryLimit)=>{
-    if(retryLimit<1){
+    if(retryLimit && retryLimit<1){
         return {
             error:"Server is busy, Kindly try after some time."
         }

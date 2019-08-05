@@ -123,7 +123,7 @@ class InputControl extends Component{
           const from = this.fromAutoComplete.getPlace();
           const to = this.toAutoComplete.getPlace();
           this.setState({submitLabel:'Re-Submit'})
-          this.props.getDirections(from, to);        
+          this.props.getDirections(from,to);        
 
       }
   };

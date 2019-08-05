@@ -9,6 +9,7 @@ Technologies Used:
 * Enzymes
 * ES 6
 * GIT
+* Bootstrap 3
 
 ## Installation
 
@@ -16,7 +17,7 @@ Technologies Used:
 npm install
 ```
 
-Add a `.env` file with the following:
+Add a `.env` file in the project root with the following:
 
 ```
 REACT_APP_GOOGLE_API_KEY = <api-key>

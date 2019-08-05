@@ -1,6 +1,7 @@
 import React from 'react';
-import Map from '../../components/Map/GoogleMap';
 import PropTypes from 'prop-types';
+
+import Map from '../../components/map/GoogleMap';
 
 import './map.css';
 
@@ -12,19 +13,16 @@ import './map.css';
  * @param {{path}} Array Props to stateless component
  * @returns {JSX}
  */
-const MapControl = ({path}) =>{
-       return(
-             
-               <div className="map-area">
-                      <Map path={path} />
-            </div>
+const MapControl = ({ path }) => (
 
-       )
+  <div className="map-area">
+    <Map path={path} />
+  </div>
 
-}
+)
 
-MapControl.propTypes ={
-       path: PropTypes.array.isRequired
+MapControl.propTypes = {
+  path: PropTypes.array.isRequired,
 }
 
 export default MapControl

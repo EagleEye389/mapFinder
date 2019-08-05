@@ -1,13 +1,13 @@
 import React from "react";
 import { shallow } from "enzyme";
-import {Loader } from "../Loader/Loader";
+import { Loader } from "../Loader/Loader";
 
 let component;
 
 describe("Loader test when isLoading props is false ", () => {
-    beforeEach(() => {
-        component = shallow(<Loader isLoading={false} />);
-      });
+  beforeEach(() => {
+    component = shallow(<Loader isLoading={false} />);
+  });
   it("does not has loader-box", () => {
     expect(component.find(".loader-box").length).toEqual(0);
   });

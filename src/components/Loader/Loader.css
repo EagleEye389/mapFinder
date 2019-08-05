@@ -2,9 +2,10 @@
     position: absolute;
     left: 0;
     top: 0;
-    background-color: #80808038;
+    background-color: #24212138;
     width: 100%;
     height: 100%;
+    border-radius: 20px;
     z-index: 999;
   }
   .loader-box > .loader {

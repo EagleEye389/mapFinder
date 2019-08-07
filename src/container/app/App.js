@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import Selection from "../selection/SelectionContainer";
-import Map from "../map/MapContainer";
+import Map from "../../components/maps/Maps";
 import Loader from "../../components/loader/Loader";
 
 import "./app.css";

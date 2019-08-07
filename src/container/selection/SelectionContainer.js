@@ -5,6 +5,8 @@ import InputControl from "../input/InitAutoInput";
 import getDirections from "../../api/apiRequest";
 import { TIME_LABEL, DISTANCE_LABEL, API_CONSTANTS } from "../../constant";
 
+import "./selectionContainer.css";
+
 /**
  * @type {Component}
  * @name Selection
@@ -25,12 +27,13 @@ class Selection extends Component {
    *  state to original one.
    */
   handleResetHandler = () => {
+    const { resetMap } = this.props;
     this.setState({
       time: "",
       distance: "",
       errorMsg: ""
     });
-    this.props.resetMap();
+    resetMap();
   };
 
   /**
@@ -40,7 +43,8 @@ class Selection extends Component {
    */
 
   displayErrorMessage = message => {
-    this.props.changeLoader(false);
+    const { changeLoader } = this.props;
+    changeLoader(false);
     this.setState({ errorMsg: message, time: "", distance: "" });
   };
 
@@ -65,8 +69,9 @@ class Selection extends Component {
    * @param {{to}} String  Passing destination
    */
   handleSubmission = async (from, to) => {
+    const { changeLoader, updatePath } = this.props;
     if (from && to) {
-      this.props.changeLoader(true);
+      changeLoader(true);
       this.setState({
         errorMsg: "",
         time: "",
@@ -83,7 +88,7 @@ class Selection extends Component {
               errorMsg: ""
             });
 
-            this.props.updatePath(path);
+            updatePath(path);
           } else {
             this.displayErrorMessage(error || API_CONSTANTS.apiError);
             return;
@@ -92,7 +97,7 @@ class Selection extends Component {
         .catch(e => {
           this.displayErrorMessage(API_CONSTANTS.apiError);
         });
-      this.props.changeLoader(false);
+      changeLoader(false);
     }
   };
 

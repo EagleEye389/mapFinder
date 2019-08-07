@@ -42,8 +42,10 @@ class InputControl extends Component {
    * @name renderInputAutoComplete
    * @description Attach the google places autocomplete to the inputs
    */
-  renderInputAutoComplete = async () => {
-    const maps = await this.props.google.maps;
+  renderInputAutoComplete = () => {
+    const {
+      google: { maps }
+    } = this.props;
     if (maps) {
       this.fromAutoComplete = new maps.places.Autocomplete(this.fromInput);
       this.toAutoComplete = new maps.places.Autocomplete(this.toInput);
@@ -89,6 +91,7 @@ class InputControl extends Component {
   handleResetMap = () => {
     this.toInput.value = "";
     this.fromInput.value = "";
+    const { resetMap } = this.props;
     this.setState(
       {
         to: false,
@@ -96,7 +99,7 @@ class InputControl extends Component {
         submitLabel: "Submit"
       },
       () => {
-        this.props.resetMap();
+        resetMap();
       }
     );
   };
@@ -125,11 +128,12 @@ class InputControl extends Component {
    * value
    */
   getRoute = () => {
+    const { getDirections } = this.props;
     if (this.fromInput.value && this.toInput.value) {
       const from = this.fromAutoComplete.getPlace();
       const to = this.toAutoComplete.getPlace();
       this.setState({ submitLabel: "Re-Submit" });
-      this.props.getDirections(from, to);
+      getDirections(from, to);
     }
   };
 

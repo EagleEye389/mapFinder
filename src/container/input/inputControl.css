@@ -5,3 +5,10 @@
 .placement {
   margin-left: -26px;
 }
+
+.mt-1 {
+  margin-top: 5px;
+}
+.mt-2 {
+  margin-top: 10px;
+}

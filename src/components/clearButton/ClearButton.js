@@ -6,8 +6,7 @@ import "./clearButton.css";
 /**
  * @description Cross button renders X if the props.value is not null
  */
-const ClearButton = props => {
-  const { value, onChangeInput, name } = props;
+const ClearButton = ({ value, onChangeInput, name }) => {
   return (
     <div
       className={`input-group-addon ${value && "visible"} `}
@@ -19,7 +18,7 @@ const ClearButton = props => {
 };
 
 ClearButton.defaultProps = {
-  value: "default"
+  value: false
 };
 
 ClearButton.propTypes = {

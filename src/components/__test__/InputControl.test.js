@@ -9,7 +9,7 @@ let input1, input1Instance, input2, input2Instance;
 let resetArray = () => {
   array.length = 0;
 };
-describe("Input control functionality working fine", () => {
+describe("Input control functionality", () => {
   beforeEach(() => {
     component = mount(
       <InputControl

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import CrossButton from "../../components/crossbutton/CrossButton";
+import CrossButton from "../../components/clearButton/ClearButton";
 import ButtonControl from "../../components/button/Button";
 
 import {
@@ -56,7 +56,8 @@ class InputControl extends Component {
 
   /**
    * @name handleCrossButtonAction
-   * @description It will clear the map.
+   * @description It will clear corresonding input box and if both input box
+   * is cleard then it will reset map also.
    * @param {{inputbox }} String an string to detect cross button instance
    */
   handleCrossButtonAction = inputbox => {
@@ -108,23 +109,12 @@ class InputControl extends Component {
   handleCrossButtonVisibilty = box => {
     /* If  start point input box has value then show the cross button else hide the
       cross button.*/
-
-    if (box === "from") {
-      if (this.fromInput.value) {
-        this.setState({ from: true });
-      } else {
-        this.setState({ from: false });
-      }
-    }
-
-    /* If  drop off point input box has value then show the cross button else hide the
-       cross button. */
-    if (box === "to") {
-      if (this.toInput.value) {
-        this.setState({ to: true });
-      } else {
-        this.setState({ to: false });
-      }
+    if (box === "from" && this.fromInput.value) {
+      this.setState({ [box]: true });
+    } else if (box === "to" && this.toInput.value) {
+      this.setState({ [box]: true });
+    } else {
+      this.setState({ [box]: false });
     }
   };
 
@@ -164,7 +154,7 @@ class InputControl extends Component {
                   onChange={() => {
                     this.handleCrossButtonVisibilty("from");
                   }}
-                  className={this.state.emptyErrorFrom + " form-control"}
+                  className="form-control"
                   ref={e1 => (this.fromInput = e1)}
                 />
               </div>
@@ -194,7 +184,7 @@ class InputControl extends Component {
                 <input
                   type="text"
                   placeholder={DROP_PLACEHOLDER}
-                  className={this.state.emptyErrorTo + " form-control"}
+                  className="form-control"
                   onChange={() => this.handleCrossButtonVisibilty("to")}
                   ref={e1 => (this.toInput = e1)}
                 />

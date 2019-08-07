@@ -75,10 +75,6 @@ class Selection extends Component {
       await getDirections(from, to, API_CONSTANTS.retryLimit)
         .then(response => {
           const { error, path } = response;
-          if (error) {
-            this.displayErrorMessage(response.error);
-            return;
-          }
           if (path) {
             let path = this.normalizedLocation(response.path);
             this.setState({
@@ -88,6 +84,9 @@ class Selection extends Component {
             });
 
             this.props.updatePath(path);
+          } else {
+            this.displayErrorMessage(error || API_CONSTANTS.apiError);
+            return;
           }
         })
         .catch(e => {

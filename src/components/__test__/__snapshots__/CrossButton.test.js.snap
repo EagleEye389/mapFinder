@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`CrossButton is loaded properly Rendering correctly 1`] = `ShallowWrapper {}`;
-
-exports[`CrossButton is loaded properly Should render correctly 1`] = `ShallowWrapper {}`;
-
-exports[`CrossButton is loaded properly renders correctly 1`] = `ShallowWrapper {}`;
-
-exports[`CrossButton is ok Rendering correctly 1`] = `ShallowWrapper {}`;

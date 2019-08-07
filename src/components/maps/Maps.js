@@ -11,7 +11,7 @@ import { Map, GoogleApiWrapper, Marker, Polyline } from "google-maps-react";
  * @returns {JSX}
  */
 
-const Mapping = ({ path, google }) => {
+const Maps = ({ path, google }) => {
   const mapStyle = {
     width: "100%",
     height: "100%",
@@ -44,11 +44,11 @@ const Mapping = ({ path, google }) => {
 };
 
 // Prop required to render this control
-Mapping.propTypes = {
+Maps.propTypes = {
   path: PropTypes.array.isRequired,
   google: PropTypes.object
 };
 
 export default GoogleApiWrapper({
   apiKey: process.env.REACT_APP_API_KEY
-})(Mapping);
+})(Maps);

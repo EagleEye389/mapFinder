@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import "./crossbutton.css";
+import "./clearButton.css";
 
 /**
  * @description Cross button renders X if the props.value is not null
  */
-const CrossButton = props => {
+const ClearButton = props => {
   const { value, onChangeInput, name } = props;
   return (
     <div
@@ -18,14 +18,14 @@ const CrossButton = props => {
   );
 };
 
-CrossButton.defaultProps = {
+ClearButton.defaultProps = {
   value: "default"
 };
 
-CrossButton.propTypes = {
+ClearButton.propTypes = {
   value: PropTypes.bool,
   name: PropTypes.string.isRequired,
   onChangeInput: PropTypes.func.isRequired
 };
 
-export default CrossButton;
+export default ClearButton;

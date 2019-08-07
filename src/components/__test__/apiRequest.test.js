@@ -1,42 +1,40 @@
-import * as ApiHandler from "../../helper/apiRequest";
-import { API_CONSTANTS } from '../../helper/constant';
-import axiosInstance from '../../helper/axios/axiosSetup'
+import * as ApiHandler from "../../api/apiRequest";
+import { API_CONSTANTS } from "../../constant";
+import axiosInstance from "../../api/axiosSetup";
 
 const mockDirectionResponse = {
   status: "success",
   path: [
     ["22.372081", "114.107877"],
     ["22.326442", "114.167811"],
-    ["22.284419", "114.159510"],
+    ["22.284419", "114.159510"]
   ],
   total_distance: 20000,
-  total_time: 1800,
+  total_time: 1800
 };
 
 const mockTokenResponse = {
-  token: "token",
+  token: "token"
 };
 
 const mockDirectionResponseRetry = {
-  status: "in progress",
-}
-
-const retryLimit = 2;
-
-const message = "Server is busy, Kindly try after some time."
+  status: "in progress"
+};
 
 describe("Tests for directions api", () => {
   it("Should test for getToken method", async () => {
     const post = jest.spyOn(axiosInstance, "post");
     const url = API_CONSTANTS.route;
     const request = {
-      "origin": "origin",
-      "destination": "destination",
-    }
+      origin: "origin",
+      destination: "destination"
+    };
 
-    post.mockImplementation(() => Promise.resolve({
-      data: mockTokenResponse,
-    }));
+    post.mockImplementation(() =>
+      Promise.resolve({
+        data: mockTokenResponse
+      })
+    );
     const token = await ApiHandler.getToken(url, request);
     expect(token).toBeDefined();
     post.mockRestore();
@@ -63,18 +61,22 @@ describe("Tests for directions api", () => {
     post.mockImplementation(() =>
       Promise.resolve({
         data: {
-          token: "token",
-        },
+          token: "token"
+        }
       })
     );
 
     get.mockImplementation(() =>
       Promise.resolve({
-        data: mockDirectionResponse,
+        data: mockDirectionResponse
       })
     );
 
-    const result = await ApiHandler.getDirections("from", "to", retryLimit);
+    const result = await ApiHandler.getDirections(
+      "from",
+      "to",
+      API_CONSTANTS.retryLimit
+    );
     expect(result).toBeDefined();
     expect(result.status).toEqual("success");
   });
@@ -85,19 +87,22 @@ describe("Tests for directions api", () => {
     post.mockImplementation(() =>
       Promise.resolve({
         data: {
-          token: "token",
-        },
+          token: "token"
+        }
       })
     );
 
     get.mockImplementation(() =>
       Promise.resolve({
-        data: mockDirectionResponseRetry,
+        data: mockDirectionResponseRetry
       })
     );
 
-    const result = await ApiHandler.getDirections("from", "to", retryLimit);
-    expect(result.error).toEqual(message)
+    const result = await ApiHandler.getDirections(
+      "from",
+      "to",
+      API_CONSTANTS.retryLimit
+    );
+    expect(result.error).toEqual(API_CONSTANTS.inProgressErrorMessage);
   });
 });
-

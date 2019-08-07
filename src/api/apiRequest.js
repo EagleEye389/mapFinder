@@ -1,6 +1,5 @@
-import Axiosinstance from './axios/axiosSetup';
-import { API_CONSTANTS } from './constant'
-
+import axiosInstance from "./axiosSetup";
+import { API_CONSTANTS } from "../constant";
 
 /**
  * @name fetchRoute
@@ -10,10 +9,10 @@ import { API_CONSTANTS } from './constant'
  * @returns {{token}}
  */
 export const getToken = async (url, request) => {
-  const response = await Axiosinstance.post(url, request);
+  const response = await axiosInstance.post(url, request);
   const { data } = response;
   return data.token;
-}
+};
 
 /**
  * @name getPath
@@ -22,12 +21,12 @@ export const getToken = async (url, request) => {
  * @return Route Info
  */
 
-export const getPath = async (token) => {
+export const getPath = async token => {
   let pathUrl = `${API_CONSTANTS.route}/${token}`;
-  const response = await Axiosinstance.get(pathUrl);
+  const response = await axiosInstance.get(pathUrl);
   const { data } = response;
   return data;
-}
+};
 
 /**
  * @name getDirections
@@ -40,14 +39,14 @@ export const getPath = async (token) => {
 export const getDirections = async (origin, destination, retryLimit) => {
   if (retryLimit && retryLimit < 1) {
     return {
-      error: "Server is busy, Kindly try after some time.",
-    }
+      error: "Server is busy, Kindly try after some time."
+    };
   }
   const url = API_CONSTANTS.route;
   const request = {
     origin,
-    destination,
-  }
+    destination
+  };
   const token = await getToken(url, request);
   let result = await getPath(token);
   if (result && result.status.toLowerCase() === API_CONSTANTS.inProgress) {
@@ -55,6 +54,6 @@ export const getDirections = async (origin, destination, retryLimit) => {
   }
 
   return result;
-}
+};
 
 export default getDirections;

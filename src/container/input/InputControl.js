@@ -9,7 +9,7 @@ import {
   START_PLACEHOLDER,
   DROP_LABEL,
   DROP_PLACEHOLDER
-} from "../../helper/constant";
+} from "../../constant";
 
 import "./inputControl.css";
 
@@ -31,13 +31,12 @@ class InputControl extends Component {
   // drop off point is saved when google autocomplete query is done.
   toAutoComplete;
 
+  // Initial State
   state = {
     from: false,
     to: false,
     submitLabel: "Submit"
   };
-
-  // Initial State
 
   /**
    * @name renderInputAutoComplete
@@ -45,8 +44,10 @@ class InputControl extends Component {
    */
   renderInputAutoComplete = async () => {
     const maps = await this.props.google.maps;
-    this.fromAutoComplete = new maps.places.Autocomplete(this.fromInput);
-    this.toAutoComplete = new maps.places.Autocomplete(this.toInput);
+    if (maps) {
+      this.fromAutoComplete = new maps.places.Autocomplete(this.fromInput);
+      this.toAutoComplete = new maps.places.Autocomplete(this.toInput);
+    }
   };
 
   componentDidMount() {
@@ -54,40 +55,57 @@ class InputControl extends Component {
   }
 
   /**
-   * @name clearInputAutoPlacer
-   * @description It will clear the autocomplete input box and reset the map.
-   * @param {{inputbox }} String an optional string to detect box or map reset click
+   * @name handleCrossButtonAction
+   * @description It will clear the map.
+   * @param {{inputbox }} String an string to detect cross button instance
    */
-  clearInputAutoPlacer = inputbox => {
-    // If startpoint cross button is clicked then clear the value and state.
+  handleCrossButtonAction = inputbox => {
+    // If from(start point) cross button is clicked then clear the value and state.
     if (inputbox === "from") {
       this.fromInput.value = "";
-      this.setState({ from: false });
+      this.setState({ from: false }, () => {
+        if (!this.toInput.value) {
+          this.handleResetMap();
+        }
+      });
     }
-    // If drop off cross button is clicked then clear the value and state.
+    // If to(drop-off point) cross button is clicked then clear the value and state.
     else if (inputbox === "to") {
       this.toInput.value = "";
-      this.setState({ to: false });
-    }
-    // If reset is clicked then clear the value and state and reset map.
-    else {
-      this.toInput.value = "";
-      this.fromInput.value = "";
-      this.setState({
-        to: false,
-        from: false,
-        submitLabel: "Submit"
+      this.setState({ to: false }, () => {
+        if (!this.fromInput.value) {
+          this.handleResetMap();
+        }
       });
-      this.props.resetMap();
     }
   };
 
   /**
-   * @name handleCrossButton
+   * @name handleResetMap
+   * @description It will clear the autocomplete input box and reset the map.
+   */
+
+  handleResetMap = () => {
+    this.toInput.value = "";
+    this.fromInput.value = "";
+    this.setState(
+      {
+        to: false,
+        from: false,
+        submitLabel: "Submit"
+      },
+      () => {
+        this.props.resetMap();
+      }
+    );
+  };
+
+  /**
+   * @name handleCrossButtonVisibilty
    * @description It will control the visibility of cross button besides the input box.
    * @param {{box}} String  to detect whose cross button is clicked.
    */
-  handleCrossButton = box => {
+  handleCrossButtonVisibilty = box => {
     /* If  start point input box has value then show the cross button else hide the
       cross button.*/
 
@@ -144,7 +162,7 @@ class InputControl extends Component {
                   type="text"
                   placeholder={START_PLACEHOLDER}
                   onChange={() => {
-                    this.handleCrossButton("from");
+                    this.handleCrossButtonVisibilty("from");
                   }}
                   className={this.state.emptyErrorFrom + " form-control"}
                   ref={e1 => (this.fromInput = e1)}
@@ -155,7 +173,7 @@ class InputControl extends Component {
               <CrossButton
                 name="source"
                 onChangeInput={() => {
-                  this.clearInputAutoPlacer("from");
+                  this.handleCrossButtonAction("from");
                 }}
                 value={this.state.from}
               />
@@ -177,7 +195,7 @@ class InputControl extends Component {
                   type="text"
                   placeholder={DROP_PLACEHOLDER}
                   className={this.state.emptyErrorTo + " form-control"}
-                  onChange={() => this.handleCrossButton("to")}
+                  onChange={() => this.handleCrossButtonVisibilty("to")}
                   ref={e1 => (this.toInput = e1)}
                 />
               </div>
@@ -186,7 +204,7 @@ class InputControl extends Component {
               <CrossButton
                 label="X"
                 name="destination"
-                onChangeInput={() => this.clearInputAutoPlacer("to")}
+                onChangeInput={() => this.handleCrossButtonAction("to")}
                 value={this.state.to}
               />
             </div>
@@ -210,7 +228,7 @@ class InputControl extends Component {
               label="Reset"
               type="btn btn-secondary"
               disableCheck={!(this.state.from || this.state.to)}
-              handleClick={this.clearInputAutoPlacer}
+              handleClick={this.handleResetMap}
             />
           </div>
         </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-import CrossButton from "../CrossButton/CrossButton";
+import CrossButton from "../crossButton/CrossButton";
 
 let component;
 describe("CrossButton is ok", () => {

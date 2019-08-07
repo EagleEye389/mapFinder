@@ -1,3 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Button component is working properly Button snapshot test 1`] = `ShallowWrapper {}`;
+
+exports[`Button component is working properly Should check button snapshot 1`] = `ShallowWrapper {}`;

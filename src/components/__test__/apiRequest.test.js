@@ -21,9 +21,18 @@ const mockDirectionResponseRetry = {
   status: "in progress"
 };
 
+const mockDirectionFailure = {
+  status: "failure"
+};
+
+let post, get;
+
 describe("Tests for directions api", () => {
+  beforeEach(() => {
+    post = jest.spyOn(axiosInstance, "post");
+    get = jest.spyOn(axiosInstance, "get");
+  });
   it("Should test for getToken method", async () => {
-    const post = jest.spyOn(axiosInstance, "post");
     const url = API_CONSTANTS.route;
     const request = {
       origin: "origin",
@@ -41,12 +50,9 @@ describe("Tests for directions api", () => {
   });
 
   it("Should test for getPath method", async () => {
-    const get = jest.spyOn(axiosInstance, "get");
-
     get.mockImplementation(() =>
       Promise.resolve({ data: mockDirectionResponse })
     );
-
     const result = await ApiHandler.getPath("token");
     expect(result).toBeDefined();
     expect(result.status).toEqual("success");
@@ -55,9 +61,6 @@ describe("Tests for directions api", () => {
   });
 
   it("Should test for getDirections method", async () => {
-    const get = jest.spyOn(axiosInstance, "get");
-    const post = jest.spyOn(axiosInstance, "post");
-
     post.mockImplementation(() =>
       Promise.resolve({
         data: {
@@ -79,11 +82,11 @@ describe("Tests for directions api", () => {
     );
     expect(result).toBeDefined();
     expect(result.status).toEqual("success");
+    get.mockRestore();
+    post.mockRestore();
   });
 
   it("Should test for getDirections method retry check", async () => {
-    const post = jest.spyOn(axiosInstance, "post");
-    const get = jest.spyOn(axiosInstance, "get");
     post.mockImplementation(() =>
       Promise.resolve({
         data: {
@@ -104,5 +107,32 @@ describe("Tests for directions api", () => {
       API_CONSTANTS.retryLimit
     );
     expect(result.error).toEqual(API_CONSTANTS.inProgressErrorMessage);
+    get.mockRestore();
+    post.mockRestore();
+  });
+
+  it("Should test for getPath failure", async () => {
+    post.mockImplementation(() =>
+      Promise.resolve({
+        data: {
+          token: "token"
+        }
+      })
+    );
+
+    get.mockImplementation(() =>
+      Promise.resolve({
+        data: mockDirectionFailure
+      })
+    );
+
+    const result = await ApiHandler.getDirections(
+      "from",
+      "to",
+      API_CONSTANTS.retryLimit
+    );
+    expect(result.status).toEqual("failure");
+    get.mockRestore();
+    post.mockRestore();
   });
 });

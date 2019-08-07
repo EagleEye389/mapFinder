@@ -4,12 +4,12 @@ This app is created to get the path directions from the google maps with the hel
 
 Technologies Used:
 
-* React
-* Jest
-* Enzymes
-* ES 6
-* GIT
-* Bootstrap 3
+- React
+- Jest
+- Enzymes
+- ES 6
+- GIT
+- Bootstrap 3
 
 ## Installation
 
@@ -22,7 +22,6 @@ Add a `.env` file in the project root with the following:
 ```
 REACT_APP_GOOGLE_API_KEY = <api-key>
 REACT_APP_BASE_URL = <mock-api-url>
-REACT_APP_RETRY_LIMIT = <Number>
 ```
 
 ## Run Tests

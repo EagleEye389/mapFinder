@@ -31,6 +31,8 @@ class InputControl extends Component {
   // drop off point is saved when google autocomplete query is done.
   toAutoComplete;
 
+  test;
+
   // Initial State
   state = {
     from: false,

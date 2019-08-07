@@ -1,6 +1,7 @@
 import React from "react";
-import Button from "../button/Button";
 import { shallow } from "enzyme";
+
+import Button from "../button/Button";
 
 let component;
 let buttonText = "test";
@@ -20,20 +21,20 @@ describe("Button component is working properly", () => {
     );
   });
 
-  it("Button showing text properly", () => {
+  it("Should render button and show text properly", () => {
     expect(component.props().children).toBe(buttonText);
   });
 
-  it("Button class is rendering correctly", () => {
+  it("Should render button and check class is present", () => {
     expect(component.hasClass(buttonType)).toBe(true);
   });
 
-  it("Button action is working properly", () => {
+  it("Should render button and check click is working", () => {
     component.find("button").simulate("click");
     expect(a).toBe(6);
   });
 
-  it("Button snapshot test", () => {
+  it("Should check button snapshot", () => {
     expect(component).toMatchSnapshot();
   });
 });

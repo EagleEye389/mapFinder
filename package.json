@@ -33,10 +33,6 @@
   },
   "devDependencies": {
     "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.14.0",
-    "eslint-plugin-es-beautifier": "^1.0.1",
-    "husky": "^3.0.2",
-    "lint-staged": "^9.2.1",
-    "pretty-quick": "^1.11.1"
+    "enzyme-adapter-react-16": "^1.14.0"
   }
 }

@@ -44,11 +44,12 @@ class App extends Component {
   };
 
   render() {
+    const { path, isLoading } = this.state;
     return (
       <div className="app">
         <div className="container">
           <div className="content">
-            <Loader isLoading={this.state.isLoading} />
+            <Loader isLoading={isLoading} />
             <div className="row">
               <div className="col-xs-12 col-md-3 col-sm-12 col-lg-3">
                 <Selection
@@ -58,7 +59,7 @@ class App extends Component {
                 />
               </div>
               <div className="col-xs-12 col-md-9 col-sm-12 col-lg-9">
-                <Map path={this.state.path} />
+                <Map path={path} />
               </div>
             </div>
           </div>

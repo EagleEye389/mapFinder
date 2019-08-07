@@ -100,6 +100,7 @@ class Selection extends Component {
    * @description Render method of the component
    */
   render() {
+    const { distance, time, errorMsg } = this.state;
     return (
       <>
         <div className="row mt-1">
@@ -115,17 +116,17 @@ class Selection extends Component {
             className="col-12 col-xs-12 col-sm-12 col-md-12 
                         col-lg-12 col-md-offset-1 col-sm-offset-1 col-xs-offset-1"
           >
-            {this.state.distance && (
+            {distance && (
               <div>
-                {DISTANCE_LABEL} : {this.state.distance}
+                {DISTANCE_LABEL} : {distance}
               </div>
             )}
-            {this.state.time && (
+            {time && (
               <div>
-                {TIME_LABEL} : {this.state.time}
+                {TIME_LABEL} : {time}
               </div>
             )}
-            <span className="text-danger">{this.state.errorMsg}</span>
+            <span className="text-danger">{errorMsg}</span>
           </div>
         </div>
       </>

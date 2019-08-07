@@ -134,6 +134,7 @@ class InputControl extends Component {
   };
 
   render() {
+    const { from, to, submitLabel } = this.state;
     return (
       <>
         <div className="form-area">
@@ -165,7 +166,7 @@ class InputControl extends Component {
                 onChangeInput={() => {
                   this.handleCrossButtonAction("from");
                 }}
-                value={this.state.from}
+                value={from}
               />
             </div>
           </div>
@@ -195,7 +196,7 @@ class InputControl extends Component {
                 label="X"
                 name="destination"
                 onChangeInput={() => this.handleCrossButtonAction("to")}
-                value={this.state.to}
+                value={to}
               />
             </div>
           </div>
@@ -207,9 +208,9 @@ class InputControl extends Component {
                          col-md-offset-1 col-sm-offset-1 col-xs-offset-1 col-lg-offset-1"
           >
             <ButtonControl
-              label={this.state.submitLabel}
+              label={submitLabel}
               type="btn btn-primary"
-              disableCheck={!(this.state.from && this.state.to)}
+              disableCheck={!(from && to)}
               handleClick={this.getRoute}
             />
           </div>
@@ -217,7 +218,7 @@ class InputControl extends Component {
             <ButtonControl
               label="Reset"
               type="btn btn-secondary"
-              disableCheck={!(this.state.from || this.state.to)}
+              disableCheck={!(from || to)}
               handleClick={this.handleResetMap}
             />
           </div>

@@ -18,8 +18,6 @@ describe("Input control functionality", () => {
         getDirections={() => Promise.resolve({})}
       />
     );
-  });
-  beforeEach(() => {
     input1 = component.find("input").at(0);
     input1Instance = input1.instance();
     input2 = component.find("input").at(1);

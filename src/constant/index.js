@@ -10,7 +10,7 @@ export const API_CONSTANTS = {
   inProgress: "in progress",
   retryLimit: 2,
   inProgressErrorMessage: "Server is busy, Kindly try after some time.",
-  apiError: "Internal Server Error"
+  apiErrorMessage: "Internal Server Error"
 };
 
 export {

@@ -62,9 +62,9 @@ class Selection extends Component {
 
   /**
    * @name handleSubmission
-   * @description This method is calling api to get path , total
-   * distance and total time and same updated in the state to refresh map.
-   * In case of any error it will same update in state.
+   * @description This method is calling api to fetch path, total
+   * distance ,total time and same updated in the state to refresh map.
+   * In case any error occured it will same update in state.
    * @param {{from}} String Passing origin
    * @param {{to}} String  Passing destination
    */

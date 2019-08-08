@@ -1,7 +1,7 @@
-const START_LABEL = "Starting Location";
-const DROP_LABEL = "Drop-off Point ";
-const START_PLACEHOLDER = "Enter start point";
-const DROP_PLACEHOLDER = "Enter drop off point";
+const START_LABEL = "Starting location";
+const DROP_LABEL = "Drop-off point ";
+const START_PLACEHOLDER = "Enter starting point";
+const DROP_PLACEHOLDER = "Enter drop-off point";
 const TIME_LABEL = "Total Time";
 const DISTANCE_LABEL = "Total Distance";
 

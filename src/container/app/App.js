@@ -5,7 +5,7 @@ import { GoogleApiWrapper } from "google-maps-react";
 import Selection from "../selection/SelectionContainer";
 import Map from "../../components/maps/Maps";
 import Loader from "../../components/loader/Loader";
-import { Loading } from "../../components/loader/Loader";
+import { AppLoader } from "../../components/loader/Loader";
 
 import "./app.css";
 
@@ -79,5 +79,5 @@ App.propTypes = {
 };
 export default GoogleApiWrapper({
   apiKey: process.env.REACT_APP_API_KEY,
-  LoadingContainer: Loading
+  LoadingContainer: AppLoader
 })(App);

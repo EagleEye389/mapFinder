@@ -24,12 +24,12 @@ Loader.propTypes = {
 };
 
 /**
- * @name Loading
+ * @name AppLoader
  * @type {Component}
  * @description Show a loader on screen during google map loading.
  * @returns {JSX}
  */
-export const Loading = () => (
+export const AppLoader = () => (
   <div className="loading-box">
     <div className="loader" />
   </div>

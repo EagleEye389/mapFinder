@@ -5,7 +5,7 @@ import renderer from "react-test-renderer";
 import ClearButton from "../clearButton/ClearButton";
 
 let component;
-describe("Clearbutton is loaded properly", () => {
+describe("Clearbutton is loading properly", () => {
   beforeEach(() => {
     component = shallow(
       <ClearButton value={true} name="destination" onChangeInput={jest.fn()} />

@@ -90,11 +90,13 @@ class Selection extends Component {
 
             updatePath(path);
           } else {
+            updatePath([]);
             this.displayErrorMessage(error || API_CONSTANTS.apiErrorMessage);
             return;
           }
         })
         .catch(e => {
+          updatePath([]);
           this.displayErrorMessage(API_CONSTANTS.apiErrorMessage);
         });
       changeLoader(false);

@@ -1,5 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Loader test when isLoading props is false  doesnot render 1`] = `ShallowWrapper {}`;
+exports[`Loader snapshot doesnot render 1`] = `null`;
 
-exports[`Loader test when isLoading props is true renders correctly 1`] = `ShallowWrapper {}`;
+exports[`Loader snapshot renders correctly 1`] = `
+<div
+  className="loader-box"
+>
+  <div
+    className="loader"
+  />
+</div>
+`;

@@ -113,12 +113,22 @@ class FormControl extends Component {
     /* If  start point input box has value then show the cross button else hide the
       cross button.*/
     if (box === "from" && this.fromInput.value) {
-      this.setState({ [box]: true });
+      this.toggleClear(box, true);
     } else if (box === "to" && this.toInput.value) {
-      this.setState({ [box]: true });
+      this.toggleClear(box, true);
     } else {
-      this.setState({ [box]: false });
+      this.toggleClear(box, false);
     }
+  };
+
+  /**
+   * @name toggleClear
+   * @description It will set the input box's clear button visibility.
+   * @param {{box}} String
+   *  @param {{value}} Boolean
+   */
+  toggleClear = (box, value) => {
+    this.setState({ [box]: value });
   };
 
   /**

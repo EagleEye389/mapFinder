@@ -20,8 +20,6 @@ describe("Input control functionality", () => {
     );
     input1 = component.find("input").at(0);
     input1Instance = input1.instance();
-    input2 = component.find("input").at(1);
-    input2Instance = input2.instance();
   });
 
   it("Should update the state ", () => {
@@ -30,7 +28,7 @@ describe("Input control functionality", () => {
     expect(component.state("from")).toBeTruthy();
   });
 
-  it("Should show the clear button for first input box", () => {
+  it("Should Show the clear button for first input box", () => {
     input1Instance.value = "india";
     input1.simulate("change", { target: { value: "india" } });
     expect(
@@ -41,19 +39,40 @@ describe("Input control functionality", () => {
   it("Should not show clear button for first input box", () => {
     expect(component.find("div[class='input-group-addon']")).toBeTruthy();
   });
+});
+
+describe("Reset button functionality check", () => {
+  beforeEach(() => {
+    component = mount(
+      <InputControl
+        google={{}}
+        resetMap={() => resetArray()}
+        getDirections={() => Promise.resolve({})}
+      />
+    );
+    input1 = component.find("input").at(0);
+    input1Instance = input1.instance();
+    input2 = component.find("input").at(1);
+    input2Instance = input2.instance();
+  });
 
   it("Should disable the reset button", () => {
     expect(component.find("button").get(1).props.disabled).toBeTruthy();
   });
 
-  it("Should enable the reset button and click clear the state and map", () => {
+  it("Should enable the reset button", () => {
     input1Instance.value = "india";
     input1.simulate("change", { target: { value: "india" } });
     input2Instance.value = "india";
     input2.simulate("change", { target: { value: "india" } });
-    expect(component.state("from")).toBeTruthy();
-    expect(component.state("to")).toBeTruthy();
     expect(component.find("button").get(1).props.disabled).toBeFalsy();
+  });
+
+  it("Should reset the map na input control on reset button click", () => {
+    input1Instance.value = "india";
+    input1.simulate("change", { target: { value: "india" } });
+    input2Instance.value = "india";
+    input2.simulate("change", { target: { value: "india" } });
     component
       .find("button")
       .at(1)

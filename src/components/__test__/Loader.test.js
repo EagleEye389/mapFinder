@@ -1,6 +1,8 @@
 import React from "react";
 import { shallow } from "enzyme";
-import  Loader  from "../loader/Loader";
+import renderer from "react-test-renderer";
+
+import Loader from "../loader/Loader";
 
 let component;
 
@@ -11,8 +13,16 @@ describe("Loader test when isLoading props is false ", () => {
   it("does not has loader-box", () => {
     expect(component.find(".loader-box").length).toEqual(0);
   });
+});
+
+describe("Loader snapshot", () => {
+  it("renders correctly", () => {
+    const tree = renderer.create(<Loader isLoading={true} />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
   it("doesnot render", () => {
-    expect(component).toMatchSnapshot();
+    const tree = renderer.create(<Loader isLoading={false} />).toJSON();
+    expect(tree).toMatchSnapshot();
   });
 });
 
@@ -22,8 +32,5 @@ describe("Loader test when isLoading props is true", () => {
   });
   it("has loader-box", () => {
     expect(component.find(".loader-box").length).toEqual(1);
-  });
-  it("renders correctly", () => {
-    expect(component).toMatchSnapshot();
   });
 });

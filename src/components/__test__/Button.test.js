@@ -1,5 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
+import renderer from "react-test-renderer";
 
 import Button from "../button/Button";
 
@@ -33,8 +34,17 @@ describe("Button component is working properly", () => {
     component.find("button").simulate("click");
     expect(a).toBe(6);
   });
-
-  it("Should check button snapshot", () => {
-    expect(component).toMatchSnapshot();
+  it("Checks app snapshot", () => {
+    const tree = renderer
+      .create(
+        <Button
+          label={buttonText}
+          type={buttonType}
+          handleClick={test}
+          disableCheck={true}
+        />
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
   });
 });

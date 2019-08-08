@@ -1,3 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Test component is rendering Should check app snapshot 1`] = `ShallowWrapper {}`;
+exports[`App component is rendering correctly Should check app snapshot 1`] = `
+<div
+  className="loading-box"
+>
+  <div
+    className="loader"
+  />
+</div>
+`;

@@ -1,6 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Button component is working properly Checks app snapshot 1`] = `
+exports[`Button snapshot checks disable button snapshot 1`] = `
+<button
+  className="primary-button"
+  disabled={false}
+  onClick={[Function]}
+>
+  test
+</button>
+`;
+
+exports[`Button snapshot checks enable button snapshot 1`] = `
 <button
   className="primary-button"
   disabled={true}

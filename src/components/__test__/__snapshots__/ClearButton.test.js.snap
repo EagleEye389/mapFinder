@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Clearbutton snapshot Should not render 1`] = `
+exports[`Clearbutton snapshot should not render 1`] = `
 <div
   className="input-group-addon false "
   onClick={[Function]}
@@ -9,7 +9,7 @@ exports[`Clearbutton snapshot Should not render 1`] = `
 </div>
 `;
 
-exports[`Clearbutton snapshot Should render correctly 1`] = `
+exports[`Clearbutton snapshot should render correctly 1`] = `
 <div
   className="input-group-addon visible "
   onClick={[Function]}

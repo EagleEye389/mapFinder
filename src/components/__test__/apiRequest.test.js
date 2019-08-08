@@ -32,7 +32,7 @@ describe("Tests for directions api", () => {
     post = jest.spyOn(axiosInstance, "post");
     get = jest.spyOn(axiosInstance, "get");
   });
-  it("Should test for getToken method", async () => {
+  it("should test for getToken method", async () => {
     const url = API_CONSTANTS.route;
     const request = {
       origin: "origin",
@@ -49,7 +49,7 @@ describe("Tests for directions api", () => {
     post.mockRestore();
   });
 
-  it("Should test for getPath method", async () => {
+  it("should test for getPath method", async () => {
     get.mockImplementation(() =>
       Promise.resolve({ data: mockDirectionResponse })
     );
@@ -60,7 +60,7 @@ describe("Tests for directions api", () => {
     get.mockRestore();
   });
 
-  it("Should test for getDirections method", async () => {
+  it("should test for getDirections method", async () => {
     post.mockImplementation(() =>
       Promise.resolve({
         data: {
@@ -86,7 +86,7 @@ describe("Tests for directions api", () => {
     post.mockRestore();
   });
 
-  it("Should test for getDirections method retry check", async () => {
+  it("should test for getDirections method retry check", async () => {
     post.mockImplementation(() =>
       Promise.resolve({
         data: {
@@ -111,7 +111,7 @@ describe("Tests for directions api", () => {
     post.mockRestore();
   });
 
-  it("Should test for getPath failure", async () => {
+  it("should test for getPath failure", async () => {
     post.mockImplementation(() =>
       Promise.resolve({
         data: {

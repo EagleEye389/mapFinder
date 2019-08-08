@@ -12,18 +12,18 @@ describe("Clearbutton is loaded properly", () => {
     );
   });
 
-  it("Should visible", () => {
+  it("should visible", () => {
     expect(component.find("div").hasClass("visible")).toBeTruthy();
   });
 
-  it("Should not visible", () => {
+  it("should not visible", () => {
     component.setProps({ value: false });
     expect(component.find("div").hasClass("visible")).toBeFalsy();
   });
 });
 
 describe("Clearbutton snapshot", () => {
-  it("Should render correctly", () => {
+  it("should render correctly", () => {
     const tree = renderer
       .create(
         <ClearButton
@@ -35,7 +35,7 @@ describe("Clearbutton snapshot", () => {
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
-  it("Should not render", () => {
+  it("should not render", () => {
     const tree = renderer
       .create(
         <ClearButton

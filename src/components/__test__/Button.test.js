@@ -22,19 +22,22 @@ describe("Button component is working properly", () => {
     );
   });
 
-  it("Should render button and show text properly", () => {
+  it("should render button and show text properly", () => {
     expect(component.props().children).toBe(buttonText);
   });
 
-  it("Should render button and check class is present", () => {
+  it("should render button and check class is present", () => {
     expect(component.hasClass(buttonType)).toBe(true);
   });
 
-  it("Should render button and check click is working", () => {
+  it("should render button and check click is working", () => {
     component.find("button").simulate("click");
     expect(a).toBe(6);
   });
-  it("Checks app snapshot", () => {
+});
+
+describe("Button snapshot", () => {
+  it("checks enable button snapshot", () => {
     const tree = renderer
       .create(
         <Button
@@ -42,6 +45,19 @@ describe("Button component is working properly", () => {
           type={buttonType}
           handleClick={test}
           disableCheck={true}
+        />
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+  it("checks disable button snapshot", () => {
+    const tree = renderer
+      .create(
+        <Button
+          label={buttonText}
+          type={buttonType}
+          handleClick={test}
+          disableCheck={false}
         />
       )
       .toJSON();

@@ -22,13 +22,13 @@ describe("Input control functionality", () => {
     input1Instance = input1.instance();
   });
 
-  it("Should update the state ", () => {
+  it("should update the state ", () => {
     input1Instance.value = "india";
     input1.simulate("change", { target: { value: "india" } });
     expect(component.state("from")).toBeTruthy();
   });
 
-  it("Should Show the clear button for first input box", () => {
+  it("should Show the clear button for first input box", () => {
     input1Instance.value = "india";
     input1.simulate("change", { target: { value: "india" } });
     expect(
@@ -36,7 +36,7 @@ describe("Input control functionality", () => {
     ).toBeTruthy();
   });
 
-  it("Should not show clear button for first input box", () => {
+  it("should not show clear button for first input box", () => {
     expect(component.find("div[class='input-group-addon']")).toBeTruthy();
   });
 });
@@ -56,11 +56,11 @@ describe("Reset button functionality check", () => {
     input2Instance = input2.instance();
   });
 
-  it("Should disable the reset button", () => {
+  it("should disable the reset button", () => {
     expect(component.find("button").get(1).props.disabled).toBeTruthy();
   });
 
-  it("Should enable the reset button", () => {
+  it("should enable the reset button", () => {
     input1Instance.value = "india";
     input1.simulate("change", { target: { value: "india" } });
     input2Instance.value = "india";
@@ -68,7 +68,7 @@ describe("Reset button functionality check", () => {
     expect(component.find("button").get(1).props.disabled).toBeFalsy();
   });
 
-  it("Should reset the map na input control on reset button click", () => {
+  it("should reset the map na input control on reset button click", () => {
     input1Instance.value = "india";
     input1.simulate("change", { target: { value: "india" } });
     input2Instance.value = "india";

@@ -1,7 +1,7 @@
 import React from "react";
 import { mount } from "enzyme";
 
-import InputControl from "../../container/input/InputControl";
+import InputControl from "../../container/form/FormControl";
 
 let component;
 let array = [1, 2, 3];

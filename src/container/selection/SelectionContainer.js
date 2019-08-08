@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import InputControl from "../input/InputControl";
+import FormControl from "../form/FormControl";
 import getDirections from "../../api/apiRequest";
 import { TIME_LABEL, DISTANCE_LABEL, API_CONSTANTS } from "../../constant";
 
@@ -62,9 +62,9 @@ class Selection extends Component {
 
   /**
    * @name handleSubmission
-   * @description This method is calling api to fetch path, total
-   * distance ,total time and same updated in the state to refresh map.
-   * In case any error occured it will same update in state.
+   * @description This method is calling api to get path , total
+   * distance and total time and same updated in the state to refresh map.
+   * In case of any error it will same update in state.
    * @param {{from}} String Passing origin
    * @param {{to}} String  Passing destination
    */
@@ -90,12 +90,12 @@ class Selection extends Component {
 
             updatePath(path);
           } else {
-            this.displayErrorMessage(error || API_CONSTANTS.apiErrorMessage);
+            this.displayErrorMessage(error || API_CONSTANTS.apiError);
             return;
           }
         })
         .catch(e => {
-          this.displayErrorMessage(API_CONSTANTS.apiErrorMessage);
+          this.displayErrorMessage(API_CONSTANTS.apiError);
         });
       changeLoader(false);
     }
@@ -111,7 +111,7 @@ class Selection extends Component {
       <>
         <div className="row mt-1">
           <div className="col-xs-12 col-12 col-md-12 col-sm-12 col-lg-12">
-            <InputControl
+            <FormControl
               getDirections={this.handleSubmission}
               resetMap={this.handleResetHandler}
               google={google}

@@ -11,14 +11,14 @@ import {
   DROP_PLACEHOLDER
 } from "../../constant";
 
-import "./inputControl.css";
+import "./formControl.css";
 
 /**
- * @name InputControl
+ * @name FormControl
  * @type {Component}
  * @description This component provide autocomplete input and button to manage the map.
  */
-class InputControl extends Component {
+class FormControl extends Component {
   // starting point input reference is saved here.
   fromInput;
 
@@ -233,10 +233,10 @@ class InputControl extends Component {
 }
 
 // Props need to pass to render this control.
-InputControl.propTypes = {
+FormControl.propTypes = {
   google: PropTypes.object.isRequired,
   resetMap: PropTypes.func.isRequired,
   getDirections: PropTypes.func.isRequired
 };
 
-export default InputControl;
+export default FormControl;

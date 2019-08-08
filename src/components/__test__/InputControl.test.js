@@ -30,23 +30,38 @@ describe("Input control functionality", () => {
     expect(component.state("from")).toBeTruthy();
   });
 
-  it("Should show the cross button for first input box", () => {
+  it("Should show the clear button for first input box", () => {
     input1Instance.value = "india";
     input1.simulate("change", { target: { value: "india" } });
-    expect(component.find("button").first()).toBeTruthy();
+    expect(
+      component.find("div[class='input-group-addon visible']")
+    ).toBeTruthy();
   });
 
-  it("Should show the reset button and on click clear the state and map", () => {
+  it("Should not show clear button for first input box", () => {
+    expect(component.find("div[class='input-group-addon']")).toBeTruthy();
+  });
+
+  it("Should disable the reset button", () => {
+    expect(component.find("button").get(1).props.disabled).toBeTruthy();
+  });
+
+  it("Should enable the reset button and click clear the state and map", () => {
     input1Instance.value = "india";
     input1.simulate("change", { target: { value: "india" } });
     input2Instance.value = "india";
     input2.simulate("change", { target: { value: "india" } });
+    expect(component.state("from")).toBeTruthy();
+    expect(component.state("to")).toBeTruthy();
+    expect(component.find("button").get(1).props.disabled).toBeFalsy();
     component
       .find("button")
       .at(1)
       .simulate("click");
     expect(component.state("from")).toBeFalsy();
+    expect(component.state("to")).toBeFalsy();
     expect(input1Instance.value).toBe("");
+    expect(input2Instance.value).toBe("");
     expect(array.length).toBe(0);
   });
 });

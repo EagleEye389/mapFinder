@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import CrossButton from "../../components/clearButton/ClearButton";
+import ClearButton from "../../components/clearButton/ClearButton";
 import ButtonControl from "../../components/button/Button";
 
 import {
@@ -165,7 +165,7 @@ class InputControl extends Component {
               </div>
             </div>
             <div className="col-2 col-xs-2 col-md-2 col-sm-2 col-lg-2 mt-1 placement">
-              <CrossButton
+              <ClearButton
                 name="source"
                 onChangeInput={() => {
                   this.handleCrossButtonAction("from");
@@ -196,7 +196,7 @@ class InputControl extends Component {
               </div>
             </div>
             <div className="col-2 col-xs-2 col-md-2 col-sm-2 col-lg-2 mt-1 placement">
-              <CrossButton
+              <ClearButton
                 label="X"
                 name="destination"
                 onChangeInput={() => this.handleCrossButtonAction("to")}

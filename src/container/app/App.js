@@ -1,8 +1,11 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { GoogleApiWrapper } from "google-maps-react";
 
 import Selection from "../selection/SelectionContainer";
 import Map from "../../components/maps/Maps";
 import Loader from "../../components/loader/Loader";
+import { Loading } from "../../components/loader/Loader";
 
 import "./app.css";
 
@@ -45,6 +48,7 @@ class App extends Component {
 
   render() {
     const { path, isLoading } = this.state;
+    const { google } = this.props;
     return (
       <div className="app">
         <div className="container">
@@ -56,10 +60,11 @@ class App extends Component {
                   updatePath={this.updateMap}
                   resetMap={this.resetMap}
                   changeLoader={this.changeLoader}
+                  google={google}
                 />
               </div>
               <div className="col-xs-12 col-md-9 col-sm-12 col-lg-9">
-                <Map path={path} />
+                <Map path={path} google={google} />
               </div>
             </div>
           </div>
@@ -69,4 +74,10 @@ class App extends Component {
   }
 }
 
-export default App;
+App.propTypes = {
+  google: PropTypes.object
+};
+export default GoogleApiWrapper({
+  apiKey: process.env.REACT_APP_API_KEY,
+  LoadingContainer: Loading
+})(App);

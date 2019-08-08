@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { Map, GoogleApiWrapper, Marker, Polyline } from "google-maps-react";
+import { Map, Marker, Polyline } from "google-maps-react";
 import "./map.css";
 
 /**
@@ -54,6 +54,4 @@ Maps.propTypes = {
   google: PropTypes.object
 };
 
-export default GoogleApiWrapper({
-  apiKey: process.env.REACT_APP_API_KEY
-})(Maps);
+export default Maps;

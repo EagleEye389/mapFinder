@@ -23,4 +23,16 @@ Loader.propTypes = {
   isLoading: PropTypes.bool.isRequired
 };
 
+/**
+ * @name Loading
+ * @type {Component}
+ * @description Show a loader on screen during google map loading.
+ * @returns {JSX}
+ */
+export const Loading = () => (
+  <div className="loading-box">
+    <div className="loader" />
+  </div>
+);
+
 export default Loader;

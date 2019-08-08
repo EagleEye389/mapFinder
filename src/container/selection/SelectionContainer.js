@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import InputControl from "../input/InitAutoInput";
+import InputControl from "../input/InputControl";
 import getDirections from "../../api/apiRequest";
 import { TIME_LABEL, DISTANCE_LABEL, API_CONSTANTS } from "../../constant";
 
@@ -106,6 +106,7 @@ class Selection extends Component {
    */
   render() {
     const { distance, time, errorMsg } = this.state;
+    const { google } = this.props;
     return (
       <>
         <div className="row mt-1">
@@ -113,6 +114,7 @@ class Selection extends Component {
             <InputControl
               getDirections={this.handleSubmission}
               resetMap={this.handleResetHandler}
+              google={google}
             />
           </div>
         </div>
@@ -142,6 +144,7 @@ class Selection extends Component {
 Selection.propTypes = {
   resetMap: PropTypes.func.isRequired,
   updatePath: PropTypes.func.isRequired,
-  changeLoader: PropTypes.func.isRequired
+  changeLoader: PropTypes.func.isRequired,
+  google: PropTypes.object
 };
 export default Selection;

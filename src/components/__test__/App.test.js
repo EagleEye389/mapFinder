@@ -1,5 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
+
 import App from "../../container/App/App";
 
 let component;
@@ -9,13 +10,10 @@ describe("Test component is rendering", () => {
   });
 
   it("Should render basic control", () => {
-    expect(component.find(".content").length).toBe(1);
+    expect(component.find("div[class='content']")).toBeTruthy();
   });
 
-  it("Should check whether state is updated", () => {
-    const path = [0, 1, 2, 3];
-    const mockPath = { path };
-    component.instance().updateMap(mockPath.path);
-    expect(component.instance().state.path).toBe(mockPath.path);
+  it("Should check app snapshot", () => {
+    expect(component).toMatchSnapshot();
   });
 });

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { GoogleApiWrapper } from "google-maps-react";
 
-import Selection from "../selection/SelectionContainer";
+import LeftPanel from "../leftPanel/LeftPanel";
 import Map from "../../components/maps/Maps";
 import Loader from "../../components/loader/Loader";
 import { AppLoader } from "../../components/loader/Loader";
@@ -21,28 +21,28 @@ class App extends Component {
   };
 
   /**
-   * @name updateMap
+   * @name updateMapPath
    * @description This method to update path to draw polyline between source and destination
    * @param {{path}} Array of latitude and logtitude.
    */
 
-  updateMap = path => {
+  updateMapPath = path => {
     this.setState({ path: path });
   };
 
   /**
-   * @name resetMap
+   * @name resetMapPath
    * @description This method to reset path to remove polyline from map.
    */
-  resetMap = () => {
+  resetMapPath = () => {
     this.setState({ path: [] });
   };
 
   /**
-   * @name changeLoader
+   * @name changeLoaderState
    * @description This method to reset loader.
    */
-  changeLoader = isLoading => {
+  changeLoaderState = isLoading => {
     this.setState({ isLoading });
   };
 
@@ -56,10 +56,10 @@ class App extends Component {
             <Loader isLoading={isLoading} />
             <div className="row">
               <div className="col-xs-12 col-md-3 col-sm-12 col-lg-3">
-                <Selection
-                  updatePath={this.updateMap}
-                  resetMap={this.resetMap}
-                  changeLoader={this.changeLoader}
+                <LeftPanel
+                  updateMapPath={this.updateMapPath}
+                  resetMapPath={this.resetMapPath}
+                  changeLoaderState={this.changeLoaderState}
                   google={google}
                 />
               </div>

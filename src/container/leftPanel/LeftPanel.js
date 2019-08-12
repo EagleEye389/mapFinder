@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import FormControl from "../form/FormControl";
-import getDirections from "../../api/apiRequest";
+import getDirections from "../../service/serviceRequest";
 import { TIME_LABEL, DISTANCE_LABEL, API_CONSTANTS } from "../../constant";
 
-import "./selectionContainer.css";
+import "./leftPanel.css";
 
 /**
  * @type {Component}
@@ -22,18 +22,18 @@ class Selection extends Component {
   };
 
   /**
-   * @name handleResetHandler
+   * @name resetMapHandler
    * @description This method is used to reset the application
    *  state to original one.
    */
-  handleResetHandler = () => {
-    const { resetMap } = this.props;
+  resetMapHandler = () => {
+    const { resetMapPath } = this.props;
     this.setState({
       time: "",
       distance: "",
       errorMsg: ""
     });
-    resetMap();
+    resetMapPath();
   };
 
   /**
@@ -43,35 +43,33 @@ class Selection extends Component {
    */
 
   displayErrorMessage = message => {
-    const { changeLoader } = this.props;
-    changeLoader(false);
     this.setState({ errorMsg: message, time: "", distance: "" });
   };
 
   /**
-   * @name normalizedLocation
+   * @name normalizedMapPathLocation
    * @description This method reconstruct path receive from api calls.
    * @param {{path}} Array
    * @returns Modified path array
    */
-  normalizedLocation = path =>
+  normalizedMapPathLocation = path =>
     path.map(coord => ({
       lat: parseFloat(coord[0]),
       lng: parseFloat(coord[1])
     }));
 
   /**
-   * @name handleSubmission
+   * @name getDirectionAndUpdateMap
    * @description This method is calling api to get path , total
    * distance and total time and same updated in the state to refresh map.
    * In case of any error it will same update in state.
    * @param {{from}} String Passing origin
    * @param {{to}} String  Passing destination
    */
-  handleSubmission = async (from, to) => {
-    const { changeLoader, updatePath } = this.props;
+  getDirectionAndUpdateMap = async (from, to) => {
+    const { changeLoaderState, updateMapPath } = this.props;
     if (from && to) {
-      changeLoader(true);
+      changeLoaderState(true);
       this.setState({
         errorMsg: "",
         time: "",
@@ -88,18 +86,18 @@ class Selection extends Component {
               errorMsg: ""
             });
 
-            updatePath(path);
+            updateMapPath(path);
           } else {
-            updatePath([]);
+            updateMapPath([]);
             this.displayErrorMessage(error || API_CONSTANTS.apiErrorMessage);
             return;
           }
         })
         .catch(e => {
-          updatePath([]);
+          updateMapPath([]);
           this.displayErrorMessage(API_CONSTANTS.apiErrorMessage);
         });
-      changeLoader(false);
+      changeLoaderState(false);
     }
   };
 
@@ -114,8 +112,8 @@ class Selection extends Component {
         <div className="row mt-1">
           <div className="col-xs-12 col-12 col-md-12 col-sm-12 col-lg-12">
             <FormControl
-              getDirections={this.handleSubmission}
-              resetMap={this.handleResetHandler}
+              getDirections={this.getDirectionAndUpdateMap}
+              resetMap={this.resetMapHandler}
               google={google}
             />
           </div>
@@ -144,9 +142,9 @@ class Selection extends Component {
 }
 
 Selection.propTypes = {
-  resetMap: PropTypes.func.isRequired,
-  updatePath: PropTypes.func.isRequired,
-  changeLoader: PropTypes.func.isRequired,
+  resetMapPath: PropTypes.func.isRequired,
+  updateMapPath: PropTypes.func.isRequired,
+  changeLoaderState: PropTypes.func.isRequired,
   google: PropTypes.object
 };
 export default Selection;

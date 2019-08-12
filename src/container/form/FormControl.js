@@ -25,12 +25,6 @@ class FormControl extends Component {
   // drop off input reference is saved here.
   toInput;
 
-  // starting point is saved when google autocomplete query is done.
-  fromAutoComplete;
-
-  // drop off point is saved when google autocomplete query is done.
-  toAutoComplete;
-
   // Initial State
   state = {
     from: false,
@@ -47,8 +41,8 @@ class FormControl extends Component {
       google: { maps }
     } = this.props;
     if (maps) {
-      this.fromAutoComplete = new maps.places.Autocomplete(this.fromInput);
-      this.toAutoComplete = new maps.places.Autocomplete(this.toInput);
+      new maps.places.Autocomplete(this.fromInput);
+      new maps.places.Autocomplete(this.toInput);
     }
   };
 
@@ -57,18 +51,18 @@ class FormControl extends Component {
   }
 
   /**
-   * @name handleCrossButtonAction
+   * @name crossButtonClickHandler
    * @description It will clear corresonding input box and if both input box
    * is cleard then it will reset map also.
    * @param {{inputbox }} String an string to detect cross button instance
    */
-  handleCrossButtonAction = inputbox => {
+  crossButtonClickHandler = inputbox => {
     // If from(start point) cross button is clicked then clear the value and state.
     if (inputbox === "from") {
       this.fromInput.value = "";
       this.setState({ from: false }, () => {
         if (!this.toInput.value) {
-          this.handleResetMap();
+          this.resetMapClickHandler();
         }
       });
     }
@@ -77,18 +71,18 @@ class FormControl extends Component {
       this.toInput.value = "";
       this.setState({ to: false }, () => {
         if (!this.fromInput.value) {
-          this.handleResetMap();
+          this.resetMapClickHandler();
         }
       });
     }
   };
 
   /**
-   * @name handleResetMap
+   * @name resetMapClickHandler
    * @description It will clear the autocomplete input box and reset the map.
    */
 
-  handleResetMap = () => {
+  resetMapClickHandler = () => {
     this.toInput.value = "";
     this.fromInput.value = "";
     const { resetMap } = this.props;
@@ -105,11 +99,11 @@ class FormControl extends Component {
   };
 
   /**
-   * @name handleCrossButtonVisibilty
+   * @name crossButtonVisibilityHandler
    * @description It will control the visibility of cross button besides the input box.
    * @param {{box}} String  to detect whose cross button is clicked.
    */
-  handleCrossButtonVisibilty = box => {
+  crossButtonVisibilityHandler = box => {
     /* If  start point input box has value then show the cross button else hide the
       cross button.*/
     if (box === "from" && this.fromInput.value) {
@@ -123,7 +117,7 @@ class FormControl extends Component {
 
   /**
    * @name toggleClear
-   * @description It will set the input box's clear button visibility.
+   * @description It will reset the input box's clear button visibility.
    * @param {{box}} String
    *  @param {{value}} Boolean
    */
@@ -132,18 +126,16 @@ class FormControl extends Component {
   };
 
   /**
-   * @name getRoute
+   * @name getRouteOnSubmission
    * @description Call api to fetch the direction if both starting and drop off point
    * is mentioned or has value else it will red outline the corresponding input for missing
    * value
    */
-  getRoute = () => {
+  getRouteOnSubmission = () => {
     const { getDirections } = this.props;
     if (this.fromInput.value && this.toInput.value) {
-      const from = this.fromAutoComplete.getPlace();
-      const to = this.toAutoComplete.getPlace();
       this.setState({ submitLabel: "Re-Submit" });
-      getDirections(from, to);
+      getDirections(this.fromInput.value, this.toInput.value);
     }
   };
 
@@ -167,7 +159,7 @@ class FormControl extends Component {
                   type="text"
                   placeholder={START_PLACEHOLDER}
                   onChange={() => {
-                    this.handleCrossButtonVisibilty("from");
+                    this.crossButtonVisibilityHandler("from");
                   }}
                   className="form-control"
                   ref={e1 => (this.fromInput = e1)}
@@ -178,7 +170,7 @@ class FormControl extends Component {
               <ClearButton
                 name="source"
                 onChangeInput={() => {
-                  this.handleCrossButtonAction("from");
+                  this.crossButtonClickHandler("from");
                 }}
                 value={from}
               />
@@ -200,7 +192,7 @@ class FormControl extends Component {
                   type="text"
                   placeholder={DROP_PLACEHOLDER}
                   className="form-control"
-                  onChange={() => this.handleCrossButtonVisibilty("to")}
+                  onChange={() => this.crossButtonVisibilityHandler("to")}
                   ref={e1 => (this.toInput = e1)}
                 />
               </div>
@@ -209,7 +201,7 @@ class FormControl extends Component {
               <ClearButton
                 label="X"
                 name="destination"
-                onChangeInput={() => this.handleCrossButtonAction("to")}
+                onChangeInput={() => this.crossButtonClickHandler("to")}
                 value={to}
               />
             </div>
@@ -225,7 +217,7 @@ class FormControl extends Component {
               label={submitLabel}
               type="btn btn-primary"
               disableCheck={!(from && to)}
-              handleClick={this.getRoute}
+              handleClick={this.getRouteOnSubmission}
             />
           </div>
           <div className="col-5 col-xs-5 col-sm-5 col-md-5 col-lg-5">
@@ -233,7 +225,7 @@ class FormControl extends Component {
               label="Reset"
               type="btn btn-secondary"
               disableCheck={!(from || to)}
-              handleClick={this.handleResetMap}
+              handleClick={this.resetMapClickHandler}
             />
           </div>
         </div>

@@ -1,6 +1,6 @@
-import * as ApiHandler from "../../api/apiRequest";
+import * as ApiHandler from "../../service/serviceRequest";
 import { API_CONSTANTS } from "../../constant";
-import axiosInstance from "../../api/axiosSetup";
+import axios from "axios";
 
 const mockDirectionResponse = {
   status: "success",
@@ -29,8 +29,8 @@ let post, get;
 
 describe("Tests for directions api", () => {
   beforeEach(() => {
-    post = jest.spyOn(axiosInstance, "post");
-    get = jest.spyOn(axiosInstance, "get");
+    post = jest.spyOn(axios, "post");
+    get = jest.spyOn(axios, "get");
   });
   it("should test for getToken method", async () => {
     const url = API_CONSTANTS.route;
@@ -53,10 +53,11 @@ describe("Tests for directions api", () => {
     get.mockImplementation(() =>
       Promise.resolve({ data: mockDirectionResponse })
     );
-    const result = await ApiHandler.getPath("token");
-    expect(result).toBeDefined();
-    expect(result.status).toEqual("success");
-    expect(result.total_distance).toEqual(20000);
+    const { data } = await ApiHandler.getPath("token");
+    expect(data).toBeDefined();
+    expect(data.status).toEqual("success");
+    expect(data.total_distance).toEqual(20000);
+    expect(data.total_time).toEqual(1800);
     get.mockRestore();
   });
 

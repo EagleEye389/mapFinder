@@ -84,7 +84,7 @@ class SidePanel extends Component {
         .then(response => {
           let { error, path, total_distance, total_time } = response;
           if (path) {
-            path = this.convertPathToLatAndLng(response.path);
+            path = this.convertPathToLatAndLng(path);
             this.setState(
               {
                 time: total_time,

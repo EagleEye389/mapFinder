@@ -1,7 +1,6 @@
-import { API_CONSTANTS } from "../constant";
 import axios from "axios";
 
-const headers = { "Content-Type": "application/json" };
+import { API_CONSTANTS } from "../constant";
 
 /**
  * @name getToken
@@ -11,11 +10,7 @@ const headers = { "Content-Type": "application/json" };
  * @returns {{token}}
  */
 export const getToken = (url, request) => {
-  return axios.post(
-    `${process.env.REACT_APP_BASE_URL}${url}`,
-    request,
-    headers
-  );
+  return axios.post(`${process.env.REACT_APP_BASE_URL}/${url}`, request);
 };
 
 /**
@@ -26,7 +21,7 @@ export const getToken = (url, request) => {
  */
 
 export const getPath = token => {
-  let pathUrl = `${process.env.REACT_APP_BASE_URL}${
+  const pathUrl = `${process.env.REACT_APP_BASE_URL}/${
     API_CONSTANTS.route
   }/${token}`;
   return axios.get(pathUrl);

@@ -1,7 +1,7 @@
 import React from "react";
 import { mount } from "enzyme";
 
-import InputControl from "../../container/form/FormControl";
+import FormControl from "../../container/form/FormControl";
 
 let component;
 let array = [1, 2, 3];
@@ -12,7 +12,7 @@ let resetArray = () => {
 describe("Input control functionality", () => {
   beforeEach(() => {
     component = mount(
-      <InputControl
+      <FormControl
         google={{}}
         resetMap={() => resetArray()}
         getDirections={() => Promise.resolve({})}
@@ -28,7 +28,7 @@ describe("Input control functionality", () => {
     expect(component.state("from")).toBeTruthy();
   });
 
-  it("should Show the clear button for first input box", () => {
+  it("should show the clear button for first input box", () => {
     input1Instance.value = "india";
     input1.simulate("change", { target: { value: "india" } });
     expect(
@@ -44,7 +44,7 @@ describe("Input control functionality", () => {
 describe("Reset button functionality check", () => {
   beforeEach(() => {
     component = mount(
-      <InputControl
+      <FormControl
         google={{}}
         resetMap={() => resetArray()}
         getDirections={() => Promise.resolve({})}
@@ -68,7 +68,7 @@ describe("Reset button functionality check", () => {
     expect(component.find("button").get(1).props.disabled).toBeFalsy();
   });
 
-  it("should reset the map na input control on reset button click", () => {
+  it("should reset the map and input control on reset button click", () => {
     input1Instance.value = "india";
     input1.simulate("change", { target: { value: "india" } });
     input2Instance.value = "india";

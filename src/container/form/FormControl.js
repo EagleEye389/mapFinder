@@ -46,43 +46,11 @@ class FormControl extends Component {
     }
   };
 
-  componentDidMount() {
-    this.renderInputAutoComplete();
-  }
-
   /**
-   * @name crossButtonClickHandler
-   * @description It will clear corresonding input box and if both input box
-   * is cleard then it will reset map also.
-   * @param {{inputbox }} String an string to detect cross button instance
-   */
-  crossButtonClickHandler = inputbox => {
-    // If from(start point) cross button is clicked then clear the value and state.
-    if (inputbox === "from") {
-      this.fromInput.value = "";
-      this.setState({ from: false }, () => {
-        if (!this.toInput.value) {
-          this.resetMapClickHandler();
-        }
-      });
-    }
-    // If to(drop-off point) cross button is clicked then clear the value and state.
-    else if (inputbox === "to") {
-      this.toInput.value = "";
-      this.setState({ to: false }, () => {
-        if (!this.fromInput.value) {
-          this.resetMapClickHandler();
-        }
-      });
-    }
-  };
-
-  /**
-   * @name resetMapClickHandler
+   * @name resetButtonClickHandler
    * @description It will clear the autocomplete input box and reset the map.
    */
-
-  resetMapClickHandler = () => {
+  resetButtonClickHandler = () => {
     this.toInput.value = "";
     this.fromInput.value = "";
     const { resetMap } = this.props;
@@ -99,11 +67,52 @@ class FormControl extends Component {
   };
 
   /**
-   * @name crossButtonVisibilityHandler
+   * @name submitButtonClickHandler
+   * @description Call api to fetch the direction if both starting and drop off point
+   * is mentioned or has value else it will red outline the corresponding input for missing
+   * value
+   */
+  submitButtonClickHandler = () => {
+    const { getDirections } = this.props;
+    if (this.fromInput.value && this.toInput.value) {
+      this.setState({ submitLabel: "Re-Submit" });
+      getDirections(this.fromInput.value, this.toInput.value);
+    }
+  };
+
+  /**
+   * @name clearButtonClickHandler
+   * @description It will clear corresonding input box and if both input box
+   * is cleard then it will reset map also.
+   * @param {{inputbox }} String an string to detect cross button instance
+   */
+  clearButtonClickHandler = inputbox => {
+    // If from(start point) cross button is clicked then clear the value and state.
+    if (inputbox === "from") {
+      this.fromInput.value = "";
+      this.setState({ from: false }, () => {
+        if (!this.toInput.value) {
+          this.resetButtonClickHandler();
+        }
+      });
+    }
+    // If to(drop-off point) cross button is clicked then clear the value and state.
+    else if (inputbox === "to") {
+      this.toInput.value = "";
+      this.setState({ to: false }, () => {
+        if (!this.fromInput.value) {
+          this.resetButtonClickHandler();
+        }
+      });
+    }
+  };
+
+  /**
+   * @name toggleClearButton
    * @description It will control the visibility of cross button besides the input box.
    * @param {{box}} String  to detect whose cross button is clicked.
    */
-  crossButtonVisibilityHandler = box => {
+  toggleClearButton = box => {
     /* If  start point input box has value then show the cross button else hide the
       cross button.*/
     if (box === "from" && this.fromInput.value) {
@@ -125,19 +134,9 @@ class FormControl extends Component {
     this.setState({ [box]: value });
   };
 
-  /**
-   * @name getRouteOnSubmission
-   * @description Call api to fetch the direction if both starting and drop off point
-   * is mentioned or has value else it will red outline the corresponding input for missing
-   * value
-   */
-  getRouteOnSubmission = () => {
-    const { getDirections } = this.props;
-    if (this.fromInput.value && this.toInput.value) {
-      this.setState({ submitLabel: "Re-Submit" });
-      getDirections(this.fromInput.value, this.toInput.value);
-    }
-  };
+  componentDidMount() {
+    this.renderInputAutoComplete();
+  }
 
   render() {
     const { from, to, submitLabel } = this.state;
@@ -159,18 +158,18 @@ class FormControl extends Component {
                   type="text"
                   placeholder={START_PLACEHOLDER}
                   onChange={() => {
-                    this.crossButtonVisibilityHandler("from");
+                    this.toggleClearButton("from");
                   }}
                   className="form-control"
                   ref={e1 => (this.fromInput = e1)}
                 />
               </div>
             </div>
-            <div className="col-2 col-xs-2 col-md-2 col-sm-2 col-lg-2 mt-1 placement">
+            <div className="col-2 col-xs-2 col-md-2 col-sm-2 col-lg-2 mt-1 clear-button-placement">
               <ClearButton
                 name="source"
                 onChangeInput={() => {
-                  this.crossButtonClickHandler("from");
+                  this.clearButtonClickHandler("from");
                 }}
                 value={from}
               />
@@ -192,16 +191,16 @@ class FormControl extends Component {
                   type="text"
                   placeholder={DROP_PLACEHOLDER}
                   className="form-control"
-                  onChange={() => this.crossButtonVisibilityHandler("to")}
+                  onChange={() => this.toggleClearButton("to")}
                   ref={e1 => (this.toInput = e1)}
                 />
               </div>
             </div>
-            <div className="col-2 col-xs-2 col-md-2 col-sm-2 col-lg-2 mt-1 placement">
+            <div className="col-2 col-xs-2 col-md-2 col-sm-2 col-lg-2 mt-1 clear-button-placement">
               <ClearButton
                 label="X"
                 name="destination"
-                onChangeInput={() => this.crossButtonClickHandler("to")}
+                onChangeInput={() => this.clearButtonClickHandler("to")}
                 value={to}
               />
             </div>
@@ -217,7 +216,7 @@ class FormControl extends Component {
               label={submitLabel}
               type="btn btn-primary"
               disableCheck={!(from && to)}
-              handleClick={this.getRouteOnSubmission}
+              handleClick={this.submitButtonClickHandler}
             />
           </div>
           <div className="col-5 col-xs-5 col-sm-5 col-md-5 col-lg-5">
@@ -225,7 +224,7 @@ class FormControl extends Component {
               label="Reset"
               type="btn btn-secondary"
               disableCheck={!(from || to)}
-              handleClick={this.resetMapClickHandler}
+              handleClick={this.resetButtonClickHandler}
             />
           </div>
         </div>

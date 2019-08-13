@@ -1,12 +1,6 @@
-/* mt margin-top  */
-.mt-1 {
-  margin-top: 5px;
-}
-
-.mt-3 {
-  margin-top: 15px;
-}
-/* mb margin-bottom */
-.mb-1 {
-  margin-bottom: 15px;
+/* To show information on screen */
+.info-display {
+  margin-bottom: 10px;
+  margin-top: 10px;
+  padding: 2px;
 }

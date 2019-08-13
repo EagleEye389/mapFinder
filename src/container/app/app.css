@@ -4,6 +4,7 @@
   font-size: 16px;
 }
 
+/* Content placement  */
 .content {
   height: 100%;
   box-shadow: -5px -5px 25px -25px gray, 5px 5px 25px 5px lightgray;

@@ -39,10 +39,10 @@ class App extends Component {
   };
 
   /**
-   * @name changeLoaderState
+   * @name toggleLoader
    * @description This method to reset loader.
    */
-  changeLoaderState = isLoading => {
+  toggleLoader = isLoading => {
     this.setState({ isLoading });
   };
 
@@ -59,7 +59,7 @@ class App extends Component {
                 <LeftPanel
                   updateMapPath={this.updateMapPath}
                   resetMapPath={this.resetMapPath}
-                  changeLoaderState={this.changeLoaderState}
+                  toggleLoader={this.toggleLoader}
                   google={google}
                 />
               </div>

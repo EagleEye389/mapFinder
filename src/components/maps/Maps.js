@@ -5,7 +5,7 @@ import { Map, Marker, Polyline } from "google-maps-react";
 import "./map.css";
 
 /**
- * @name Mapping
+ * @name Maps
  * @type {Component}
  * @description Map component to display google map and path
  * @param {{path,google}} Object Props to stateless component

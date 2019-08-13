@@ -9,11 +9,11 @@ import "./leftPanel.css";
 
 /**
  * @type {Component}
- * @name Selection
+ * @name LeftPanel
  * @description View to show input and button to manipulate map.
  */
 
-class Selection extends Component {
+class LeftPanel extends Component {
   // Initial State
   state = {
     errorMsg: "",
@@ -22,11 +22,11 @@ class Selection extends Component {
   };
 
   /**
-   * @name resetMapHandler
+   * @name resetMap
    * @description This method is used to reset the application
    *  state to original one.
    */
-  resetMapHandler = () => {
+  resetMap = () => {
     const { resetMapPath } = this.props;
     this.setState({
       time: "",
@@ -47,12 +47,12 @@ class Selection extends Component {
   };
 
   /**
-   * @name normalizedMapPathLocation
+   * @name convertPathToLatAndLng
    * @description This method reconstruct path receive from api calls.
    * @param {{path}} Array
    * @returns Modified path array
    */
-  normalizedMapPathLocation = path =>
+  convertPathToLatAndLng = path =>
     path.map(coord => ({
       lat: parseFloat(coord[0]),
       lng: parseFloat(coord[1])
@@ -67,9 +67,9 @@ class Selection extends Component {
    * @param {{to}} String  Passing destination
    */
   getDirectionAndUpdateMap = async (from, to) => {
-    const { changeLoaderState, updateMapPath } = this.props;
+    const { toggleLoader, updateMapPath } = this.props;
     if (from && to) {
-      changeLoaderState(true);
+      toggleLoader(true);
       this.setState({
         errorMsg: "",
         time: "",
@@ -79,7 +79,7 @@ class Selection extends Component {
         .then(response => {
           const { error, path } = response;
           if (path) {
-            let path = this.normalizedLocation(response.path);
+            let path = this.convertPathToLatAndLng(response.path);
             this.setState({
               time: response.total_time,
               distance: response.total_distance,
@@ -97,7 +97,7 @@ class Selection extends Component {
           updateMapPath([]);
           this.displayErrorMessage(API_CONSTANTS.apiErrorMessage);
         });
-      changeLoaderState(false);
+      toggleLoader(false);
     }
   };
 
@@ -113,12 +113,12 @@ class Selection extends Component {
           <div className="col-xs-12 col-12 col-md-12 col-sm-12 col-lg-12">
             <FormControl
               getDirections={this.getDirectionAndUpdateMap}
-              resetMap={this.resetMapHandler}
+              resetMap={this.resetMap}
               google={google}
             />
           </div>
         </div>
-        <div className="row mt-3 mb-1">
+        <div className="row info-display">
           <div
             className="col-12 col-xs-12 col-sm-12 col-md-12 
                         col-lg-12 col-md-offset-1 col-sm-offset-1 col-xs-offset-1"
@@ -141,10 +141,10 @@ class Selection extends Component {
   }
 }
 
-Selection.propTypes = {
+LeftPanel.propTypes = {
   resetMapPath: PropTypes.func.isRequired,
   updateMapPath: PropTypes.func.isRequired,
-  changeLoaderState: PropTypes.func.isRequired,
+  toggleLoader: PropTypes.func.isRequired,
   google: PropTypes.object
 };
-export default Selection;
+export default LeftPanel;

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { Map, Marker, Polyline } from "google-maps-react";
-import "./map.css";
+import "./maps.css";
 
 /**
  * @name Maps
@@ -29,10 +29,14 @@ const Maps = ({ path, google }) => {
         center={path ? path[0] : { lat: 20.5937, lng: 78.9629 }}
       >
         {path && path.length && (
-          <Marker position={path[0]} title="Start point" />
+          <Marker position={path[0]} title="Start point" label="S" />
         )}
         {path && path.length && (
-          <Marker position={path[path.length - 1]} title="Drop off point" />
+          <Marker
+            position={path[path.length - 1]}
+            title="Drop off point"
+            label="D"
+          />
         )}
 
         {path && path.length && (

@@ -52,10 +52,10 @@ class App extends Component {
     return (
       <div className="app">
         <div className="container">
-          <div className="content">
+          <div className="content-box">
             <Loader isLoading={isLoading} />
             <div className="row">
-              <div className="col-xs-12 col-md-3 col-sm-12 col-lg-3">
+              <div className="col-xs-12 col-md-3">
                 <SidePanel
                   updateMapPath={this.updateMapPath}
                   resetMapPath={this.resetMapPath}
@@ -63,7 +63,7 @@ class App extends Component {
                   google={google}
                 />
               </div>
-              <div className="col-xs-12 col-md-9 col-sm-12 col-lg-9">
+              <div className="col-xs-12 col-md-9">
                 <Map path={path} google={google} />
               </div>
             </div>

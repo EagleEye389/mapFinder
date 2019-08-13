@@ -144,7 +144,7 @@ class FormControl extends Component {
       <>
         <div className="form-area">
           <div className="row">
-            <div className="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div className="col-xs-12">
               <span>
                 <label>{START_LABEL}</label>
               </span>
@@ -152,7 +152,7 @@ class FormControl extends Component {
           </div>
 
           <div className="row mt-1">
-            <div className="col-10 col-xs-10 col-md-10 col-sm-10 col-lg-10">
+            <div className="col-xs-10">
               <div className="form-group">
                 <input
                   type="text"
@@ -165,7 +165,7 @@ class FormControl extends Component {
                 />
               </div>
             </div>
-            <div className="col-2 col-xs-2 col-md-2 col-sm-2 col-lg-2 mt-1 clear-button-placement">
+            <div className="col-xs-2 mt-1 clear-button-placement">
               <ClearButton
                 name="source"
                 onChangeInput={() => {
@@ -177,7 +177,7 @@ class FormControl extends Component {
           </div>
 
           <div className="row">
-            <div className="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div className="col-xs-12">
               <span>
                 <label>{DROP_LABEL}</label>
               </span>
@@ -185,7 +185,7 @@ class FormControl extends Component {
           </div>
 
           <div className="row mt-1">
-            <div className="col-10 col-xs-10 col-md-10 col-sm-10 col-lg-10 ">
+            <div className="col-xs-10">
               <div className="form-group">
                 <input
                   type="text"
@@ -196,7 +196,7 @@ class FormControl extends Component {
                 />
               </div>
             </div>
-            <div className="col-2 col-xs-2 col-md-2 col-sm-2 col-lg-2 mt-1 clear-button-placement">
+            <div className="col-xs-2 mt-1 clear-button-placement">
               <ClearButton
                 label="X"
                 name="destination"
@@ -208,10 +208,7 @@ class FormControl extends Component {
         </div>
 
         <div className="row mt-2">
-          <div
-            className="col-5 col-sm-5 col-xs-5 col-md-5
-                         col-md-offset-1 col-sm-offset-1 col-xs-offset-1 col-lg-offset-1"
-          >
+          <div className="col-xs-5 col-xs-offset-1">
             <ButtonControl
               label={submitLabel}
               type="btn btn-primary"
@@ -219,7 +216,7 @@ class FormControl extends Component {
               handleClick={this.submitButtonClickHandler}
             />
           </div>
-          <div className="col-5 col-xs-5 col-sm-5 col-md-5 col-lg-5">
+          <div className="col-xs-5">
             <ButtonControl
               label="Reset"
               type="btn btn-secondary"

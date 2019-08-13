@@ -5,7 +5,7 @@
 }
 
 /* Content placement  */
-.content {
+.content-box {
   height: 100%;
   box-shadow: -5px -5px 25px -25px gray, 5px 5px 25px 5px lightgray;
   border-radius: 20px;

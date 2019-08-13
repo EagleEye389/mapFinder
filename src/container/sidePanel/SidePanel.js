@@ -28,12 +28,14 @@ class SidePanel extends Component {
    */
   resetMap = () => {
     const { resetMapPath } = this.props;
-    this.setState({
-      time: "",
-      distance: "",
-      errorMsg: ""
-    });
-    resetMapPath();
+    this.setState(
+      {
+        time: "",
+        distance: "",
+        errorMsg: ""
+      },
+      resetMapPath
+    );
   };
 
   /**
@@ -43,7 +45,10 @@ class SidePanel extends Component {
    */
 
   displayErrorMessage = message => {
-    this.setState({ errorMsg: message, time: "", distance: "" });
+    const { updateMapPath } = this.props;
+    this.setState({ errorMsg: message, time: "", distance: "" }, () =>
+      updateMapPath([])
+    );
   };
 
   /**
@@ -77,24 +82,23 @@ class SidePanel extends Component {
       });
       await getDirections(from, to, API_CONSTANTS.retryLimit)
         .then(response => {
-          const { error, path } = response;
+          let { error, path, total_distance, total_time } = response;
           if (path) {
-            let path = this.convertPathToLatAndLng(response.path);
-            this.setState({
-              time: response.total_time,
-              distance: response.total_distance,
-              errorMsg: ""
-            });
-
-            updateMapPath(path);
-          } else {
-            updateMapPath([]);
+            path = this.convertPathToLatAndLng(response.path);
+            this.setState(
+              {
+                time: total_time,
+                distance: total_distance,
+                errorMsg: ""
+              },
+              () => updateMapPath(path)
+            );
+          }
+          if (error) {
             this.displayErrorMessage(error || API_CONSTANTS.apiErrorMessage);
-            return;
           }
         })
         .catch(e => {
-          updateMapPath([]);
           this.displayErrorMessage(API_CONSTANTS.apiErrorMessage);
         });
       toggleLoader(false);
@@ -110,7 +114,7 @@ class SidePanel extends Component {
     return (
       <>
         <div className="row">
-          <div className="col-xs-12 col-12 col-md-12 col-sm-12 col-lg-12">
+          <div className="col-xs-12">
             <FormControl
               getDirections={this.getDirectionAndUpdateMap}
               resetMap={this.resetMap}
@@ -118,11 +122,8 @@ class SidePanel extends Component {
             />
           </div>
         </div>
-        <div className="row info-display">
-          <div
-            className="col-12 col-xs-12 col-sm-12 col-md-12 
-                        col-lg-12 col-md-offset-1 col-sm-offset-1 col-xs-offset-1"
-          >
+        <div className="row info-box">
+          <div className="col-xs-12 col-xs-offset-1">
             {distance && (
               <div>
                 {DISTANCE_LABEL} : {distance}
@@ -133,7 +134,7 @@ class SidePanel extends Component {
                 {TIME_LABEL} : {time}
               </div>
             )}
-            <span className="text-danger">{errorMsg}</span>
+            {errorMsg && <span className="text-danger">{errorMsg}</span>}
           </div>
         </div>
       </>

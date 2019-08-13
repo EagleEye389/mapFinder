@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { GoogleApiWrapper } from "google-maps-react";
 
-import LeftPanel from "../leftPanel/LeftPanel";
+import SidePanel from "../sidePanel/SidePanel";
 import Map from "../../components/maps/Maps";
 import Loader from "../../components/loader/Loader";
 import { AppLoader } from "../../components/loader/Loader";
@@ -10,8 +10,8 @@ import { AppLoader } from "../../components/loader/Loader";
 import "./app.css";
 
 /**
- * @type {Component}
  * @name APP
+ * @type {Component}
  * @description Main container.
  */
 class App extends Component {
@@ -56,7 +56,7 @@ class App extends Component {
             <Loader isLoading={isLoading} />
             <div className="row">
               <div className="col-xs-12 col-md-3 col-sm-12 col-lg-3">
-                <LeftPanel
+                <SidePanel
                   updateMapPath={this.updateMapPath}
                   resetMapPath={this.resetMapPath}
                   toggleLoader={this.toggleLoader}

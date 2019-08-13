@@ -2,7 +2,7 @@
 
 exports[`App snapshot should check snapshot 1`] = `
 <div
-  className="loading-box"
+  className="apploading-box"
 >
   <div
     className="loader"

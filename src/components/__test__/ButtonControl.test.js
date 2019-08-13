@@ -2,7 +2,7 @@ import React from "react";
 import { shallow } from "enzyme";
 import renderer from "react-test-renderer";
 
-import Button from "../button/Button";
+import Button from "../customButton/ButtonControl";
 
 let component;
 let buttonText = "test";

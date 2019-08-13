@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import ClearButton from "../../components/clearButton/ClearButton";
-import ButtonControl from "../../components/button/Button";
+import ButtonControl from "../../components/customButton/ButtonControl";
 
 import {
   START_LABEL,

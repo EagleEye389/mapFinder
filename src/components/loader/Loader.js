@@ -30,7 +30,7 @@ Loader.propTypes = {
  * @returns {JSX}
  */
 export const AppLoader = () => (
-  <div className="loading-box">
+  <div className="apploading-box">
     <div className="loader" />
   </div>
 );

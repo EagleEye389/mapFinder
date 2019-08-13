@@ -5,15 +5,15 @@ import FormControl from "../form/FormControl";
 import getDirections from "../../service/serviceRequest";
 import { TIME_LABEL, DISTANCE_LABEL, API_CONSTANTS } from "../../constant";
 
-import "./leftPanel.css";
+import "./sidePanel.css";
 
 /**
+ * @name SidePanel
  * @type {Component}
- * @name LeftPanel
  * @description View to show input and button to manipulate map.
  */
 
-class LeftPanel extends Component {
+class SidePanel extends Component {
   // Initial State
   state = {
     errorMsg: "",
@@ -109,7 +109,7 @@ class LeftPanel extends Component {
     const { google } = this.props;
     return (
       <>
-        <div className="row mt-1">
+        <div className="row">
           <div className="col-xs-12 col-12 col-md-12 col-sm-12 col-lg-12">
             <FormControl
               getDirections={this.getDirectionAndUpdateMap}
@@ -141,10 +141,10 @@ class LeftPanel extends Component {
   }
 }
 
-LeftPanel.propTypes = {
+SidePanel.propTypes = {
   resetMapPath: PropTypes.func.isRequired,
   updateMapPath: PropTypes.func.isRequired,
   toggleLoader: PropTypes.func.isRequired,
   google: PropTypes.object
 };
-export default LeftPanel;
+export default SidePanel;

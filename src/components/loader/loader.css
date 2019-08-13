@@ -1,5 +1,5 @@
 .loader-box,
-.loading-box {
+.apploading-box {
   position: absolute;
   left: 0;
   top: 0;
@@ -9,15 +9,14 @@
   border-radius: 20px;
   z-index: 9999;
 }
-.loading-box {
+.apploading-box {
   background-color: transparent;
   width: 80%;
   height: 80%;
   margin-left: 10%;
   justify-content: center;
 }
-.loader-box > .loader,
-.loading-box > .loader {
+.loader {
   position: absolute;
   margin: auto;
   background: rgb(5, 50, 241);

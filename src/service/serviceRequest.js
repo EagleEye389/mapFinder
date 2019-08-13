@@ -43,7 +43,7 @@ export const getPath = token => {
 export const getDirections = async (origin, destination, retryLimit) => {
   if (retryLimit && retryLimit < 1) {
     return {
-      error: "Server is busy, Kindly try after some time."
+      error: API_CONSTANTS.inProgressErrorMessage
     };
   }
   const url = API_CONSTANTS.route;
@@ -51,7 +51,7 @@ export const getDirections = async (origin, destination, retryLimit) => {
     origin,
     destination
   };
-  let result;
+
   const {
     data: { token },
     error
@@ -60,21 +60,13 @@ export const getDirections = async (origin, destination, retryLimit) => {
   if (token) {
     const { data, error } = await getPath(token);
 
-    if (data) {
-      if (data.status.toLowerCase() === API_CONSTANTS.inProgress) {
-        result = getDirections(origin, destination, retryLimit - 1);
-      } else {
-        result = data;
-      }
+    if (data && data.status.toLowerCase() === API_CONSTANTS.inProgress) {
+      return getDirections(origin, destination, retryLimit - 1);
     }
-    if (error) {
-      result = error;
-    }
-  } else {
-    result = error;
+    return data || error;
   }
 
-  return result;
+  return error;
 };
 
 export default getDirections;
